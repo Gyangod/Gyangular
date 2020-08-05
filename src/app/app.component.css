@@ -1,0 +1,12 @@
+.profileButton{
+  border: none;
+  background: none;
+}
+.settingList{
+  /* margin-right: auto; */
+  padding: auto;
+}
+.settingsTitle{
+  margin-right: 3em;
+  margin-left: 1.5em;
+}

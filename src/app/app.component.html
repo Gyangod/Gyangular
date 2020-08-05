@@ -1,0 +1,34 @@
+<mat-drawer-container [hasBackdrop]="true">
+  <mat-drawer #drawer mode="push">
+    <mat-list role="list">
+      <mat-list-item role="listitem"><strong>Settings</strong></mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item role="listitem">
+        <span class="fas fa-globe fa-2x settingList"></span>
+        <span class="settingsTitle">Change Language</span>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <span class="fas fa-adjust fa-2x settingList"></span>
+        <span class="settingsTitle">Dark Mode</span>
+        <mat-slide-toggle [checked]="false"></mat-slide-toggle>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <span class="fas fa-phone-square fa-2x settingList"></span>
+        <span class="settingsTitle">Contact us</span>
+      </mat-list-item>
+    </mat-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <nav class="navbar navbar-dark bg-primary">
+      <button class="navbar-toggler" type="button" (click)="drawer.toggle()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">GyanGod</a>
+      <!-- <button type="button" class="profileButton"><span class="fas fa-user-circle fa-2x"></span></button> -->
+      <button type="button" class="btn btn-info"><i class="fas fa-sign-in-alt "></i></button>
+      <!-- <button type="button" class="btn btn-info">Signup</button> -->
+    </nav>
+
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

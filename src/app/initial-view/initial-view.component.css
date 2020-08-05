@@ -1,0 +1,45 @@
+.headingDiv{
+  height: 15rem;
+  text-align: center;
+  justify-content: center;
+  vertical-align: middle;
+  /* line-height: 15rem; */
+}
+.headingTitle{
+  font-size: 30px;
+  line-height: normal;
+  padding: 10% 0;
+}
+.infoDiv{
+  text-align: justify;
+}
+
+.infoSubmenu{
+  display: list-item;
+  list-style-type: circle;
+  margin-left: 1.5rem;
+}
+
+
+@media only screen and (min-width: 379px) and (max-width: 600px){
+  .headingTitle{
+    font-size: 26px;
+    line-height: normal;
+    padding: 25% 0;
+  }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 876px){
+  .headingTitle{
+    font-size: 28px;
+    padding: 15% 0;
+  }
+}
+
+@media only screen and (min-width: 100px) and (max-width: 378px){
+  .headingTitle{
+    font-size: 22px;
+    line-height: normal;
+    padding: 25% 0;
+  }
+}
