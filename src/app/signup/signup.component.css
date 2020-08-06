@@ -1,0 +1,29 @@
+.signUpMainDiv{
+  text-align: center;
+}
+.signUpBodyDiv{
+  width: 60%;
+  margin-left: 20%;
+}
+.divUsername{
+  width: 60%;
+}
+.divFirstName{
+  width: 47%;
+  float: left;
+}
+.divLastName{
+  width: 47%;
+  float: right;
+}
+.divCountryCode{
+  width: 25%;
+  float: left;
+}
+.divContactNumber{
+  width: 70%;
+  float: right;
+}
+.divPassword{
+  width: 80%;
+}

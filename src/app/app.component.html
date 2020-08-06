@@ -25,7 +25,14 @@
       </button>
       <a class="navbar-brand" href="#">GyanGod</a>
       <!-- <button type="button" class="profileButton"><span class="fas fa-user-circle fa-2x"></span></button> -->
-      <button type="button" class="btn btn-info"><i class="fas fa-sign-in-alt "></i></button>
+      <button
+        type="button"
+        class="btn btn-info"
+        [routerLink]="'/signup'"
+        routerLinkActive="router-link-active"
+      >
+        <i class="fas fa-sign-in-alt"></i>
+      </button>
       <!-- <button type="button" class="btn btn-info">Signup</button> -->
     </nav>
 

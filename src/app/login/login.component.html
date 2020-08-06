@@ -1,1 +1,24 @@
-<p>login works!</p>
+<form>
+  <div class="loginBodyDiv">
+    <div class="form-group divUsername">
+      <label for="inputUsername">Username or Email</label>
+      <input type="text" class="form-control" id="inputUsername" placeholder="Enter Username">
+    </div>
+    <div class="form-group divPassword">
+      <label for="inputPassword">Password</label>
+      <div class="input-group-append">
+        <input [type]="fieldTextType ? 'text' : 'password'" class="form-control" id="inputPassword"
+          placeholder="Enter Password">
+        <span class="input-group-text" (click)="toggleFieldTextType()">
+          <i class="fa" [ngClass]="{'fa-eye-slash': !fieldTextType, 'fa-eye': fieldTextType }"></i>
+        </span>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" style="margin-bottom: 1rem;">Submit</button>
+  </div>
+  <div class="loginSignupDiv">
+    <h3>Did not have a account?</h3>
+    <button class="btn btn-outline-secondary" [routerLink]="'/signup'" routerLinkActive="router-link-active">Sign
+      up</button>
+  </div>
+</form>

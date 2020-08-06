@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignupComponent implements OnInit {
 
-  constructor() { }
+  fieldTextType: boolean;
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
-
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
+  }
 }
