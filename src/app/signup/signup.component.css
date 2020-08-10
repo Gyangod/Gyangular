@@ -27,3 +27,23 @@
 .divPassword{
   width: 80%;
 }
+@media only screen and (min-width: 379px) and (max-width: 600px){
+  .signUpBodyDiv{
+    width: 90%;
+    margin-left: 5%;
+  }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 876px){
+  .signUpBodyDiv{
+    width: 80%;
+    margin-left: 10%;
+  }
+}
+
+@media only screen and (min-width: 100px) and (max-width: 378px){
+  .signUpBodyDiv{
+    width: 100%;
+    margin-left: 0;
+  }
+}

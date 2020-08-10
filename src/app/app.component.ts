@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Gyangod';
+  checked: Boolean = false;
+
+  constructor(private router: Router) { }
+
+  clickLogin(drawer) {
+    this.router.navigateByUrl('/login');
+    drawer.toggle();
+  }
 }
