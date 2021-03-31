@@ -1,0 +1,12 @@
+.searchBarTop{
+  width: 90%;
+  float: left;
+}
+.leftTopic{
+  width: 45%;
+  float: left;
+}
+.rightTopic{
+  width: 45%;
+  float: right;
+}
