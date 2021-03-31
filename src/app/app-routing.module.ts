@@ -5,6 +5,7 @@ import { InitialViewComponent } from './initial-view/initial-view.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { TeacherselectComponent } from './teacherselect/teacherselect.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+  {
+    path: 'select',
+    component: TeacherselectComponent,
   }
 ];
 
