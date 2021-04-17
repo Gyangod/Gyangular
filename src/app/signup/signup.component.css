@@ -1,3 +1,46 @@
+.timeline{
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.listItem{
+  transition: all 200ms ease-in;
+}
+.status{
+  padding: 0 8rem 0 0;
+  display: flex;
+  justify-content: left;
+  border-top: 2px solid #D6DCE0;
+  position: relative;
+  transition: all 200ms ease-in;
+}
+.status:before {
+  content: "";
+  width: 25px;
+  height: 25px;
+  background-color: white;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  position: absolute;
+  top: -15px;
+  transition: all 200ms ease-in;
+}
+.listItem.complete .status{
+  border-top: 2px solid #66DC71;
+}
+.listItem.complete .status:before {
+  background-color: #66DC71;
+  border: none;
+  transition: all 200ms ease-in;
+}
+.leftBottomButton{
+  float: left;
+}
+.rightBottomButton{
+  float: right;
+}
 .signUpMainDiv{
   text-align: center;
 }
@@ -28,6 +71,19 @@
   width: 80%;
 }
 @media only screen and (min-width: 379px) and (max-width: 600px){
+  .timeline{
+    list-style-type: none;
+    display: block;
+  }
+  .listItem{
+    transition: all 200ms ease-in;
+    display: flex;
+    width: inherit;
+  }
+  .status:before{
+    top: 30%;
+    transition: all 200ms ease-in;
+  }
   .signUpBodyDiv{
     width: 90%;
     margin-left: 5%;

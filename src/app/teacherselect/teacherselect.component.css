@@ -1,0 +1,14 @@
+.cardOverall{
+  margin-top: 1.5rem;
+}
+.imageSpan{
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  border: 1px solid #000;
+  float: left;
+  position: relative;
+}
+.rightTextCard{
+  margin-left: 6rem;
+}

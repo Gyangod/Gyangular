@@ -1,4 +1,35 @@
-<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+<div class="container">
+  <ul class="timeline">
+    <li class="listItem complete">
+      <div class="status"></div>
+    </li>
+    <li [ngClass]="status!=1 ? 'complete' : ''" class="listItem">
+    <div class="status"></div>
+    </li>
+    <li [ngClass]="status==3 ? 'complete' : ''" class="listItem">
+      <div class="status" style="border-top: none;"></div>
+    </li>
+  </ul>
+  <div [hidden]="status!=1">
+    1st one
+  </div>
+  <div [hidden]="status!=2">
+    12st one
+  </div>
+  <div [hidden]="status!=3">
+    113st one
+  </div>
+  <div>
+    <div class="leftBottomButton">
+      <button class="btn btn-primary" (click)="previousStatus()" [hidden]="status==1">Previous</button>
+    </div>
+    <div class="rightBottomButton">
+      <button class="btn btn-primary" (click)="nextStatus()" [hidden]="status==3">Next</button>
+      <button class="btn btn-success" [hidden]="status!=3">Finish</button>
+    </div>
+  </div>
+</div>
+<!-- <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
   <div class="signUpMainDiv">
     <h3>Already a member?</h3>
     <button class="btn btn-outline-secondary" [routerLink]="'/login'"
@@ -54,4 +85,4 @@
       <button type="submit" class="btn btn-primary">Submit</button>
     </div>
   </form>
-</div>
+</div> -->

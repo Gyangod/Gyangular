@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BottomNavModule } from 'ngx-bottom-nav';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +15,8 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { TeacherselectComponent } from './teacherselect/teacherselect.component';
+import { VotingGroupComponent } from './voting-group/voting-group.component';
+import { ProgramComponent } from './program/program.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { TeacherselectComponent } from './teacherselect/teacherselect.component'
     SignupComponent,
     LoginComponent,
     HomeComponent,
-    TeacherselectComponent
+    TeacherselectComponent,
+    VotingGroupComponent,
+    ProgramComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -32,7 +35,6 @@ import { TeacherselectComponent } from './teacherselect/teacherselect.component'
     BrowserAnimationsModule,
     MatSidenavModule,
     MatListModule,
-    BottomNavModule,
     NgxMaterialTimepickerModule,
     MatSlideToggleModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })

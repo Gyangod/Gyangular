@@ -8,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
 export class SignupComponent implements OnInit {
 
   fieldTextType: boolean;
+  status: number = 1;
   constructor() {
   }
 
   ngOnInit(): void {
+  }
+  previousStatus() {
+    this.status -= 1;
+  }
+  nextStatus() {
+    this.status += 1;
   }
   toggleFieldTextType() {
     this.fieldTextType = !this.fieldTextType;

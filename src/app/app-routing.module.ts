@@ -6,6 +6,7 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { TeacherselectComponent } from './teacherselect/teacherselect.component';
+import { VotingGroupComponent } from './voting-group/voting-group.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'select',
     component: TeacherselectComponent,
+  },
+  {
+    path: 'voting',
+    component: VotingGroupComponent,
   }
 ];
 
