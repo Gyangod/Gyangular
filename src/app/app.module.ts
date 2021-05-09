@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +20,7 @@ import { HomeComponent } from './home/home.component';
 import { TeacherselectComponent } from './teacherselect/teacherselect.component';
 import { VotingGroupComponent } from './voting-group/voting-group.component';
 import { ProgramComponent } from './program/program.component';
+import { GmapsComponent } from './gmaps/gmaps.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,8 @@ import { ProgramComponent } from './program/program.component';
     HomeComponent,
     TeacherselectComponent,
     VotingGroupComponent,
-    ProgramComponent
+    ProgramComponent,
+    GmapsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -37,6 +42,10 @@ import { ProgramComponent } from './program/program.component';
     MatListModule,
     NgxMaterialTimepickerModule,
     MatSlideToggleModule,
+    CommonModule,
+    GoogleMapsModule,
+    HttpClientModule,
+    HttpClientJsonpModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   // exports: [
