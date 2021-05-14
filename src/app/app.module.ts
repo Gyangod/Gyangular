@@ -4,6 +4,10 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +25,7 @@ import { TeacherselectComponent } from './teacherselect/teacherselect.component'
 import { VotingGroupComponent } from './voting-group/voting-group.component';
 import { ProgramComponent } from './program/program.component';
 import { GmapsComponent } from './gmaps/gmaps.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -32,12 +37,19 @@ import { GmapsComponent } from './gmaps/gmaps.component';
     TeacherselectComponent,
     VotingGroupComponent,
     ProgramComponent,
-    GmapsComponent
+    GmapsComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     BrowserAnimationsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
+    FormsModule,
+    NgbModalModule,
     MatSidenavModule,
     MatListModule,
     NgxMaterialTimepickerModule,
@@ -46,7 +58,8 @@ import { GmapsComponent } from './gmaps/gmaps.component';
     GoogleMapsModule,
     HttpClientModule,
     HttpClientJsonpModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    NgbModule
   ],
   // exports: [
   //   MatSlideToggle
