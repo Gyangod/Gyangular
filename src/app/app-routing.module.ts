@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { TeacherselectComponent } from './teacherselect/teacherselect.component';
 import { VotingGroupComponent } from './voting-group/voting-group.component';
 import {GmapsComponent} from './gmaps/gmaps.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'maps',
     component: GmapsComponent,
+  },
+  {
+    path: 'calendar',
+    component: CalendarComponent,
   }
 ];
 
