@@ -4,6 +4,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { InitialViewComponent } from './initial-view/initial-view.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import { TeacherselectComponent } from './teacherselect/teacherselect.component';
+import { VotingGroupComponent } from './voting-group/voting-group.component';
+import { ProgramComponent } from './program/program.component';
+import { GmapsComponent } from './gmaps/gmaps.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 const routes: Routes = [
   {
@@ -22,40 +28,38 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.component').then(m => m.HomeComponent)
-    // component: HomeComponent,
+    // loadChildren: "./home/home.component#HomeComponent"
+    // loadChildren: () => import('./home/home.component').then(m => m.HomeComponent)
+    component: HomeComponent,
   },
   {
     path: 'select',
-    loadChildren: () => import('./teacherselect/teacherselect.component').then(m => m.TeacherselectComponent)
-    // component: TeacherselectComponent,
+    // loadChildren: () => import('./teacherselect/teacherselect.component').then(m => m.TeacherselectComponent)
+    component: TeacherselectComponent,
   },
   {
     path: 'voting',
-    loadChildren: () => import('./voting-group/voting-group.component').then(m => m.VotingGroupComponent)
-    // component: VotingGroupComponent,
+    // loadChildren: () => import('./voting-group/voting-group.component').then(m => m.VotingGroupComponent)
+    component: VotingGroupComponent,
   },
   {
     path: 'maps',
-    loadChildren: () => import('./gmaps/gmaps.component').then(m => m.GmapsComponent)
-    // component: GmapsComponent,
+    // loadChildren: () => import('./gmaps/gmaps.component').then(m => m.GmapsComponent)
+    component: GmapsComponent,
   },
   {
     path: 'calendar',
-    loadChildren: () => import('./calendar/calendar.component').then(m => m.CalendarComponent)
-    // component: CalendarComponent,
+    // loadChildren: () => import('./calendar/calendar.component').then(m => m.CalendarComponent)
+    component: CalendarComponent,
   }
-  // { 
-  //   path: 'groups', 
-  //   loadChildren: () => import('./group/group.module').then(m => m.GroupModule) 
-  // }
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
       initialNavigation: 'enabled',
-      relativeLinkResolution: 'legacy'
+      relativeLinkResolution: 'legacy',
+      // enableTracing: true
     }),
   ],
   exports: [RouterModule],

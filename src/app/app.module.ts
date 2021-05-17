@@ -38,7 +38,7 @@ import { CalendarComponent } from './calendar/calendar.component';
     VotingGroupComponent,
     ProgramComponent,
     GmapsComponent,
-    CalendarComponent
+    CalendarComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -61,10 +61,13 @@ import { CalendarComponent } from './calendar/calendar.component';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     NgbModule
   ],
-  // exports: [
-  //   MatSlideToggle
-  // ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+    // HomeComponent
+  ],
+  exports: [
+    
+  ]
 })
 export class AppModule { }
