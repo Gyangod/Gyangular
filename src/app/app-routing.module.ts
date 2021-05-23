@@ -6,7 +6,6 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { TeacherselectComponent } from './teacherselect/teacherselect.component';
 import { VotingGroupComponent } from './voting-group/voting-group.component';
-import { GmapsComponent } from './gmaps/gmaps.component';
 import { CalendarComponent } from './calendar/calendar.component';
 
 const routes: Routes = [
@@ -16,12 +15,10 @@ const routes: Routes = [
   },
   {
     path: 'signup',
-    // loadChildren: () => import('./signup/signup.component').then(m => m.SignupComponent)
     component: SignupComponent,
   },
   {
     path: 'login',
-    // loadChildren: () => import('./login/login.component').then(m => m.LoginComponent)
     component: LoginComponent,
   },
   {
@@ -41,8 +38,7 @@ const routes: Routes = [
   },
   {
     path: 'maps',
-    // loadChildren: () => import('./gmaps/gmaps.component').then(m => m.GmapsComponent)
-    component: GmapsComponent,
+    loadChildren: () => import('./gmaps/gmaps.module').then(m => m.GmapsModule)
   },
   {
     path: 'calendar',

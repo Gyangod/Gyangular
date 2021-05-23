@@ -4,11 +4,11 @@ import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-gmaps',
-  templateUrl: './gmaps.component.html',
-  styleUrls: ['./gmaps.component.css']
+  selector: 'app-google-maps',
+  templateUrl: './google-maps.component.html',
+  styleUrls: ['./google-maps.component.css']
 })
-export class GmapsComponent implements OnInit {
+export class GoogleMapsComponent implements OnInit {
   apiLoaded: Observable<boolean>;
 
   constructor(httpClient: HttpClient) { 

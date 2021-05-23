@@ -1,8 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { GoogleMapsModule } from '@angular/google-maps';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
@@ -21,7 +19,6 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { TeacherselectComponent } from './teacherselect/teacherselect.component';
 import { VotingGroupComponent } from './voting-group/voting-group.component';
-import { GmapsComponent } from './gmaps/gmaps.component';
 import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
@@ -32,7 +29,6 @@ import { CalendarComponent } from './calendar/calendar.component';
     LoginComponent,
     TeacherselectComponent,
     VotingGroupComponent,
-    GmapsComponent,
     CalendarComponent,
   ],
   imports: [
@@ -49,9 +45,6 @@ import { CalendarComponent } from './calendar/calendar.component';
     MatListModule,
     MatSlideToggleModule,
     CommonModule,
-    GoogleMapsModule,
-    HttpClientModule,
-    HttpClientJsonpModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     NgbModule
   ],
