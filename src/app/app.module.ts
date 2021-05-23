@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
@@ -20,10 +19,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { InitialViewComponent } from './initial-view/initial-view.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
 import { TeacherselectComponent } from './teacherselect/teacherselect.component';
 import { VotingGroupComponent } from './voting-group/voting-group.component';
-import { ProgramComponent } from './program/program.component';
 import { GmapsComponent } from './gmaps/gmaps.component';
 import { CalendarComponent } from './calendar/calendar.component';
 
@@ -33,10 +30,8 @@ import { CalendarComponent } from './calendar/calendar.component';
     InitialViewComponent,
     SignupComponent,
     LoginComponent,
-    HomeComponent,
     TeacherselectComponent,
     VotingGroupComponent,
-    ProgramComponent,
     GmapsComponent,
     CalendarComponent,
   ],
@@ -52,7 +47,6 @@ import { CalendarComponent } from './calendar/calendar.component';
     NgbModalModule,
     MatSidenavModule,
     MatListModule,
-    NgxMaterialTimepickerModule,
     MatSlideToggleModule,
     CommonModule,
     GoogleMapsModule,
