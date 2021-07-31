@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { TeacherselectComponent } from './teacherselect/teacherselect.component';
 import { VotingGroupComponent } from './voting-group/voting-group.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import {HomeComponent} from './home/home.component';
 
 const routes: Routes = [
   {
@@ -23,8 +24,8 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
-    // component: HomeComponent,
+    // loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+    component: HomeComponent,
   },
   {
     path: 'select',
@@ -52,7 +53,6 @@ const routes: Routes = [
     RouterModule.forRoot(routes, {
       initialNavigation: 'enabled',
       relativeLinkResolution: 'legacy',
-      // enableTracing: true
     }),
   ],
   exports: [RouterModule],
