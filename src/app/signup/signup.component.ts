@@ -14,13 +14,5 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  previousStatus() {
-    this.status -= 1;
-  }
-  nextStatus() {
-    this.status += 1;
-  }
-  toggleFieldTextType() {
-    this.fieldTextType = !this.fieldTextType;
-  }
+
 }

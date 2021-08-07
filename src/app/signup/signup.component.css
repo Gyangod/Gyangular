@@ -1,4 +1,4 @@
-.timeline{
+/* .timeline{
   list-style-type: none;
   display: flex;
   align-items: center;
@@ -34,7 +34,7 @@
   background-color: #66DC71;
   border: none;
   transition: all 200ms ease-in;
-}
+} */
 .leftBottomButton{
   float: left;
 }
