@@ -6,7 +6,7 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { TeacherselectComponent } from './teacherselect/teacherselect.component';
 import { VotingGroupComponent } from './voting-group/voting-group.component';
-import { CalendarComponent } from './calendar/calendar.component';
+// import { CalendarComponent } from './calendar/calendar.component';
 // import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
@@ -43,8 +43,8 @@ const routes: Routes = [
   },
   {
     path: 'calendar',
-    // loadChildren: () => import('./calendar/calendar.component').then(m => m.CalendarComponent)
-    component: CalendarComponent,
+    loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarPersonalModule)
+    // component: CalendarComponent,
   }
 ];
 
