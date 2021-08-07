@@ -3,8 +3,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+////////////////////////////////calendar
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+////////////////////////////////time-picker
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +23,7 @@ import { LoginComponent } from './login/login.component';
 import { TeacherselectComponent } from './teacherselect/teacherselect.component';
 import { VotingGroupComponent } from './voting-group/voting-group.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +34,7 @@ import { CalendarComponent } from './calendar/calendar.component';
     TeacherselectComponent,
     VotingGroupComponent,
     CalendarComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -46,7 +51,8 @@ import { CalendarComponent } from './calendar/calendar.component';
     MatSlideToggleModule,
     CommonModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    NgbModule
+    NgbModule,
+    NgxMaterialTimepickerModule
   ],
   providers: [],
   bootstrap: [

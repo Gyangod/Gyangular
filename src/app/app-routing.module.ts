@@ -7,7 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { TeacherselectComponent } from './teacherselect/teacherselect.component';
 import { VotingGroupComponent } from './voting-group/voting-group.component';
 import { CalendarComponent } from './calendar/calendar.component';
-import {HomeComponent} from './home/home.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
@@ -53,6 +53,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes, {
       initialNavigation: 'enabled',
       relativeLinkResolution: 'legacy',
+
     }),
   ],
   exports: [RouterModule],
