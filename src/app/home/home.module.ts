@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-////////////////////////////////time-picker
-import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { TimePickerModule } from '../shared-resources/timepicker/timepicker.module';
+
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from "./home.component";
@@ -12,9 +11,8 @@ import { HomeComponent } from "./home.component";
     HomeComponent
   ],
   imports: [
-    CommonModule,
     HomeRoutingModule,
-    NgxMaterialTimepickerModule,
+    TimePickerModule,
   ]
 })
 export class HomeModule { }
