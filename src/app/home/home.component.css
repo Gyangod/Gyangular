@@ -2,12 +2,20 @@
     width: 90%;
     float: left;
   }
-  .leftTopic{
+.leftTopic{
     width: 45%;
     float: left;
   }
-  .rightTopic{
+.rightTopic{
     width: 45%;
     float: right;
   }
-  
+.custom-bottom-nav{
+    justify-content: space-around;
+  }
+.custom-bottom-div{
+  text-align: center;
+}
+.icon-help-bottom{
+  display: block;
+}
