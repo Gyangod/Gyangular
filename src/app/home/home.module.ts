@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { TimePickerModule } from '../shared-resources/timepicker/timepicker.module';
+import { TimePickerModule } from '../common/timepicker/timepicker.module';
 
 
 import { HomeRoutingModule } from './home-routing.module';

@@ -16,6 +16,7 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { TeacherselectComponent } from './teacherselect/teacherselect.component';
 import { VotingGroupComponent } from './voting-group/voting-group.component';
+import {GlobalService} from './global/global.service';
 
 
 @NgModule({
@@ -26,18 +27,11 @@ import { VotingGroupComponent } from './voting-group/voting-group.component';
     LoginComponent,
     TeacherselectComponent,
     VotingGroupComponent,
-    // CalendarComponent,
-    // HomeComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     BrowserAnimationsModule,
-    // CalendarModule.forRoot({
-    //   provide: DateAdapter,
-    //   useFactory: adapterFactory,
-    // }),
-    // FormsModule,
     NgbModule,
     MatSidenavModule,
     MatListModule,
@@ -47,10 +41,11 @@ import { VotingGroupComponent } from './voting-group/voting-group.component';
     
 
   ],
-  providers: [],
+  providers: [
+    GlobalService
+  ],
   bootstrap: [
     AppComponent
-    // HomeComponent
   ],
   exports: [
     

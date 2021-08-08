@@ -26,8 +26,12 @@
   </mat-drawer>
   <mat-drawer-content>
     <nav class="navbar navbar-dark bg-primary">
-      <button class="navbar-toggler" type="button" (click)="drawer.toggle()">
+      <button class="navbar-toggler" type="button" (click)="drawer.toggle()" *ngIf="barIcon">
         <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- (click)="drawer.toggle()" -->
+      <button class="btn" type="button" *ngIf="!barIcon">
+        <i class="fas fa-arrow-left"></i>
       </button>
       <a class="navbar-brand" [routerLink]="'/'" routerLinkActive="router-link-active">GyanGod</a>
       <!-- <button type="button" class="profileButton"><span class="fas fa-user-circle fa-2x"></span></button> -->
