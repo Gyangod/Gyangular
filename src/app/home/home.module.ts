@@ -4,7 +4,7 @@ import { TimePickerModule } from '../common/timepicker/timepicker.module';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from "./home.component";
-import {GlobalService} from '../global/global.service';
+// import {GlobalService} from '../global/global.service';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import {GlobalService} from '../global/global.service';
     TimePickerModule,
   ],
   providers: [
-    GlobalService,
+    // GlobalService,
   ]
 })
 export class HomeModule { }

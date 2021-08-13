@@ -16,7 +16,7 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { TeacherselectComponent } from './teacherselect/teacherselect.component';
 import { VotingGroupComponent } from './voting-group/voting-group.component';
-import {GlobalService} from './global/global.service';
+// import {GlobalService} from './global/global.service';
 
 
 @NgModule({
@@ -42,7 +42,7 @@ import {GlobalService} from './global/global.service';
 
   ],
   providers: [
-    GlobalService
+    // GlobalService
   ],
   bootstrap: [
     AppComponent
