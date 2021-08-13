@@ -10,12 +10,3 @@
     width: 45%;
     float: right;
   }
-.custom-bottom-nav{
-    justify-content: space-around;
-  }
-.custom-bottom-div{
-  text-align: center;
-}
-.icon-help-bottom{
-  display: block;
-}

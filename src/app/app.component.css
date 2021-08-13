@@ -11,3 +11,12 @@
   margin-right: 3em;
   margin-left: 1.5em;
 }
+.custom-bottom-nav{
+  justify-content: space-around;
+}
+.custom-bottom-div{
+text-align: center;
+}
+.icon-help-bottom{
+display: block;
+}

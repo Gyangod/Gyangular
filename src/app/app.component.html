@@ -8,8 +8,8 @@
       </mat-list-item>
       <mat-list-item role="listitem"><strong>Settings</strong></mat-list-item>
       <mat-divider></mat-divider>
-      <mat-list-item role="listitem">
-        <span class="fas fa-globe fa-2x settingList"></span>
+      <mat-list-item role="listitem" (click)="clickHome(drawer)">
+        <span class="fas fa-globe fa-2x settingList" ></span>
         <span class="settingsTitle">Change Language</span>
       </mat-list-item>
       <mat-list-item role="listitem">
@@ -43,18 +43,25 @@
     </nav>
 
     <router-outlet></router-outlet>
-    <!-- <ngx-bottom-nav>
-      <button ngx-bottom-nav label="Home" routerLink="/" exact="true">
-        <i ngxBottomNavIcon class="fa fa-home">home</i>
-      </button>
-
-      <button ngx-bottom-nav label="Search" routerLink="/search">
-        <i class="fa fa-home" ngxBottomNavIcon>search</i>
-      </button>
-
-      <button ngx-bottom-nav label="Forum" routerLink="/forum">
-        <i class="fa fa-home" ngxBottomNavIcon>home</i>
-      </button>
-    </ngx-bottom-nav> -->
+    <nav class="navbar navbar-dark bg-dark custom-bottom-nav fixed-bottom" *ngIf="bottomNav"> <!--fixed-bottom-->
+      <div class="nav-item custom-bottom-div">
+        <a href="/home">
+          <i class="fas fa-home fa-2x"></i>
+          <span class="icon-help-bottom">Home</span>
+        </a>
+      </div>
+      <div class="nav-item custom-bottom-div">
+        <a href="/home" >
+          <i class="far fa-calendar fa-2x" ></i>
+          <span class="icon-help-bottom">Calendar</span>
+        </a>
+      </div>
+      <div class="nav-item custom-bottom-div">
+        <a href="/home">
+          <i class="fas fa-users fa-2x"></i>
+          <span class="icon-help-bottom">Classes</span>
+        </a>
+      </div>
+    </nav>
   </mat-drawer-content>
 </mat-drawer-container>
