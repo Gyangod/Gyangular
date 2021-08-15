@@ -1,6 +1,9 @@
-<mat-drawer-container [hasBackdrop]="true">
+<mat-drawer-container [hasBackdrop]="true" fullscreen>
   <!--todo: use bootstrap offcanvas instead of mat drawer-->
   <mat-drawer #drawer mode="push">
+    <span style="position: absolute; right: 0;z-index: 9;" (click)="drawer.toggle()">
+      <i class="far fa-times-circle fa-2x"></i>
+    </span>
     <mat-list role="list">
       <mat-list-item role="listitem" style="cursor: pointer;" (click)="clickLogin(drawer)">
         <span class="fas fa-door-open fa-2x settingList"></span>
@@ -9,7 +12,7 @@
       <mat-list-item role="listitem"><strong>Settings</strong></mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item role="listitem" (click)="clickHome(drawer)">
-        <span class="fas fa-globe fa-2x settingList" ></span>
+        <span class="fas fa-globe fa-2x settingList"></span>
         <span class="settingsTitle">Change Language</span>
       </mat-list-item>
       <mat-list-item role="listitem">
@@ -43,8 +46,9 @@
     </nav>
 
     <router-outlet></router-outlet>
-    
-    <nav class="navbar navbar-dark bg-dark custom-bottom-nav fixed-bottom" *ngIf="bottomNav"> <!--fixed-bottom-->
+
+    <nav class="navbar navbar-dark bg-dark custom-bottom-nav fixed-bottom" *ngIf="bottomNav">
+      <!--fixed-bottom-->
       <div class="nav-item custom-bottom-div">
         <a href="/home">
           <i class="fas fa-home fa-2x"></i>
@@ -52,8 +56,8 @@
         </a>
       </div>
       <div class="nav-item custom-bottom-div">
-        <a href="/home" >
-          <i class="far fa-calendar fa-2x" ></i>
+        <a href="/home">
+          <i class="far fa-calendar fa-2x"></i>
           <span class="icon-help-bottom">Calendar</span>
         </a>
       </div>
