@@ -14,7 +14,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { InitialViewComponent } from './initial-view/initial-view.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
-import { TeacherselectComponent } from './teacherselect/teacherselect.component';
+// import { TeacherselectComponent } from './teacherselect/teacherselect.component';
 import { VotingGroupComponent } from './voting-group/voting-group.component';
 // import {GlobalService} from './global/global.service';
 
@@ -25,7 +25,7 @@ import { VotingGroupComponent } from './voting-group/voting-group.component';
     InitialViewComponent,
     SignupComponent,
     LoginComponent,
-    TeacherselectComponent,
+    // TeacherselectComponent,
     VotingGroupComponent,
   ],
   imports: [

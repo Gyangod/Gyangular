@@ -10,11 +10,13 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
   declarations: [],
   imports: [
     CommonModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    FormsModule
   ],
   exports: [
     NgxMaterialTimepickerModule,
-    CommonModule
+    CommonModule,
+    FormsModule
   ]
 })
 export class TimePickerModule { }

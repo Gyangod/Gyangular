@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { InitialViewComponent } from './initial-view/initial-view.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
-import { TeacherselectComponent } from './teacherselect/teacherselect.component';
+// import { TeacherselectComponent } from './teacherselect/teacherselect.component';
 import { VotingGroupComponent } from './voting-group/voting-group.component';
 // import { CalendarComponent } from './calendar/calendar.component';
 // import { HomeComponent } from './home/home.component';
@@ -26,11 +26,6 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
     // component: HomeComponent,
-  },
-  {
-    path: 'select',
-    // loadChildren: () => import('./teacherselect/teacherselect.component').then(m => m.TeacherselectComponent)
-    component: TeacherselectComponent,
   },
   {
     path: 'voting',

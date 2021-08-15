@@ -5,16 +5,18 @@ import { NgSelectModule } from '@ng-select/ng-select';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from "./home.component";
+import { TeacherSelectComponent } from '../teacher-select/teacher-select.component';
 // import {GlobalService} from '../global/global.service';
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    TeacherSelectComponent
   ],
   imports: [
     HomeRoutingModule,
     TimePickerModule,
-    NgSelectModule
+    NgSelectModule,
   ],
   providers: [
     // GlobalService,
