@@ -8,6 +8,8 @@ import {GlobalService} from '../global/global.service';
 })
 export class HomeComponent implements OnInit {
 
+  grades: String[]= ["Class 8","Class 9","Class 10","Class 11","Class 12","Class 1","Class 2","Class 3","Class 4","Class 5","Class 7","Class 6","Gate","IES","PSU"];
+
   constructor(private globalService: GlobalService) {
     
    }
@@ -15,6 +17,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.changeBottomNav(true);
   }
+
   changeBottomNav(newBottomNav: boolean): void {
     this.globalService.setBotttomNav(newBottomNav);
   }
