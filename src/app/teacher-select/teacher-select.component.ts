@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {GlobalService} from '../global/global.service';
 
 @Component({
   selector: 'app-teacher-select',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeacherSelectComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private globalService: GlobalService) { 
+    this.changeMenuIconToBack(false);
   }
 
+  ngOnInit(): void {
+
+  }
+
+  changeMenuIconToBack(menuIcon: boolean): void {
+    this.globalService.setMenuIcon(menuIcon);
+  }
 }

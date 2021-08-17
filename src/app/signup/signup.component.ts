@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {GlobalService} from '../global/global.service';
 
 @Component({
   selector: 'app-signup',
@@ -9,10 +10,14 @@ export class SignupComponent implements OnInit {
 
   fieldTextType: boolean;
   status: number = 1;
-  constructor() {
+  constructor(private globalService: GlobalService) {
+    this.changeMenuIconToBack(true);
   }
 
   ngOnInit(): void {
   }
 
+  changeMenuIconToBack(menuIcon: boolean): void {
+    this.globalService.setMenuIcon(menuIcon);
+  }
 }

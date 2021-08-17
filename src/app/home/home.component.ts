@@ -16,18 +16,19 @@ export class HomeComponent implements OnInit {
              {name: "Grads", value: ["GATE","IES","PSU"] },
   ];
   constructor(private globalService: GlobalService,private router: Router) {
-    
+    this.initializeValues(true,true);
    }
 
   ngOnInit(): void {
-    this.changeBottomNav(true);
+    
   }
 
-  changeBottomNav(newBottomNav: boolean): void {
+  initializeValues(newBottomNav: boolean,menuIcon: boolean): void {
     this.globalService.setBotttomNav(newBottomNav);
+    this.globalService.setMenuIcon(menuIcon);
   }
+
   selectTeacher(){
-    console.log("working");
     this.router.navigateByUrl('/home/select');
   }
 
