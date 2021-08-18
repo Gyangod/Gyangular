@@ -15,7 +15,9 @@ export class AppComponent implements OnInit {
   bottomPanel: boolean  = false;
   bottomSub: any;
   menuSub: any;
-  constructor(private router: Router,private globalService:GlobalService,private _location:Location) { }
+  constructor(private router: Router,private globalService:GlobalService,private _location:Location) {
+    // this.intializeValues();
+   }
 
   ngOnInit(): void {
     this.subscribeConstructions();
@@ -26,12 +28,16 @@ export class AppComponent implements OnInit {
     this.menuSub.unsubscribe();
   }
 
+  // intializeValues(): void {
+  //   this.globalService.setBotttomNav(false);
+  //   this.globalService.setMenuIcon(true);
+  // }
+
   subscribeConstructions(){
-    // this.globalService.setBotttomNav(false);
     this.bottomSub = this.globalService.getBotttomNav().subscribe(botttom =>{
       this.bottomPanel = botttom;
+      // console.log(this.bottomPanel);
     });
-    // this.globalService.setMenuIcon(true);
     this.menuSub = this.globalService.getMenuIcon().subscribe(menuIcon =>{
       this.barIcon = menuIcon;
     });
