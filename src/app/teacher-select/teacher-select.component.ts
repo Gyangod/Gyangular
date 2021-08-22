@@ -7,17 +7,29 @@ import {GlobalService} from '../global/global.service';
   styleUrls: ['./teacher-select.component.css']
 })
 export class TeacherSelectComponent implements OnInit {
-
+  math = Math;
   teachers = [{
     name: 'Ayush Jain', 
     subjects:['Maths','Science'],
-    rating: 4.5,
+    rating: 4.4,
     price: [{span: 'weekly', rate: 300},{span:'monthly', rate: 1000}]
   },
   {
     name: 'Balaji Panner Selvam', 
     subjects:['Computer'],
-    rating: 4.5,
+    rating: 2.3,
+    price: [{span: 'weekly', rate: 500},{span:'monthly', rate: 2000}]
+  },
+  {
+    name: 'Amrita Chakraborty', 
+    subjects:['Computer','IT','Physics','Chemistry'],
+    rating: 3.2,
+    price: [{span: 'weekly', rate: 500},{span:'monthly', rate: 2000}]
+  },
+  {
+    name: 'Someone with very bug name that will not fit in this', 
+    subjects:['All Subjects'],
+    rating: 1.0,
     price: [{span: 'weekly', rate: 500},{span:'monthly', rate: 2000}]
   },
 ];

@@ -35,70 +35,81 @@
   border: none;
   transition: all 200ms ease-in;
 } */
-.leftBottomButton{
+
+.leftBottomButton {
   float: left;
 }
-.rightBottomButton{
+
+.rightBottomButton {
   float: right;
 }
-.signUpMainDiv{
+
+.signUpMainDiv {
   text-align: center;
 }
-.signUpBodyDiv{
+
+.signUpBodyDiv {
   width: 60%;
   margin-left: 20%;
 }
-.divUsername{
+
+.divUsername {
   width: 60%;
 }
-.divFirstName{
+
+.divFirstName {
   width: 47%;
   float: left;
 }
-.divLastName{
+
+.divLastName {
   width: 47%;
   float: right;
 }
-.divCountryCode{
+
+.divCountryCode {
   width: 25%;
   float: left;
 }
-.divContactNumber{
+
+.divContactNumber {
   width: 70%;
   float: right;
 }
-.divPassword{
+
+.divPassword {
   width: 80%;
 }
-@media only screen and (min-width: 379px) and (max-width: 600px){
-  .timeline{
+
+@media only screen and (min-width: 379px) and (max-width: 600px) {
+  .timeline {
     list-style-type: none;
     display: block;
   }
-  .listItem{
+  .listItem {
     transition: all 200ms ease-in;
     display: flex;
     width: inherit;
   }
-  .status:before{
+  .status:before {
     top: 30%;
     transition: all 200ms ease-in;
   }
-  .signUpBodyDiv{
+  .signUpBodyDiv {
     width: 90%;
     margin-left: 5%;
   }
 }
 
-@media only screen and (min-width: 601px) and (max-width: 876px){
-  .signUpBodyDiv{
+@media only screen and (min-width: 601px) and (max-width: 876px) {
+  .signUpBodyDiv {
     width: 80%;
     margin-left: 10%;
   }
 }
 
-@media only screen and (min-width: 100px) and (max-width: 378px){
-  .signUpBodyDiv{
+@media only screen and (min-width: 100px) and (max-width: 378px) {
+  .signUpBodyDiv {
     width: 100%;
     margin-left: 0;
   }

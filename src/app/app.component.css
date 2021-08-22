@@ -1,22 +1,31 @@
-
-.profileButton{
+.profileButton {
   border: none;
   background: none;
 }
-.settingList{
+
+.settingList {
   /* margin-right: auto; */
   padding: auto;
 }
-.settingsTitle{
+
+.settingsTitle {
   margin-right: 3em;
   margin-left: 1.5em;
 }
-.custom-bottom-nav{
+
+.custom-bottom-nav {
   justify-content: space-around;
 }
-.custom-bottom-div{
-text-align: center;
+
+.custom-bottom-div {
+  text-align: center;
 }
-.icon-help-bottom{
-display: block;
+
+.icon-help-bottom {
+  display: block;
+}
+
+.footerPadding {
+  clear: both;
+  height: 6rem;
 }

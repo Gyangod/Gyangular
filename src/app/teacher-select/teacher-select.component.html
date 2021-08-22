@@ -1,17 +1,32 @@
 <div class="row">
-    <div class="col-sm-6 col-12" style="padding:2%;" *ngFor="let teacher of teachers">
+    <div class="col-xl-4 col-sm-6 col-12 mainDivSelect" *ngFor="let teacher of teachers">
         <div class="card text-center">
-            <div class="card-header">
-                {{ teacher.name }}
+            <div class="card-header teacherName" tabindex="0" data-toggle="tooltip" title="{{ teacher.name }}">
+                <span style="pointer-events: none;">{{ teacher.name }}</span>
             </div>
             <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <div class="row">
+                    <div class="col-8 row">
+                        <ul class="col-4 subjectUl" *ngFor="let subject of teacher.subjects">
+                            <li class="eachSubject">{{subject}}</li>
+                        </ul>
+                    </div>
+                    <div class="col-4">
+                        <i class="fas fa-star fa-2x" [ngClass]="'colorStar'+math.round(teacher.rating)"></i>
+                        <span class="ratingText">
+                            {{ teacher.rating }}
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12" *ngFor="let price of teacher.price; let i=index">
+                        <span *ngIf="i==0">{{ price.rate }} / {{ price.span}}</span>
+                    </div>
+                </div>
             </div>
-            <div class="card-footer text-muted">
-                2 days ago
+            <div class="card-footer">
+                <button class="btn btn-primary">Select</button>
             </div>
         </div>
     </div>
-</div>>
+</div>

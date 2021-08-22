@@ -1,0 +1,46 @@
+.mainDivSelect {
+    padding: 2% 1% 0 1%;
+}
+
+.teacherName {
+    font-size: 2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.colorStar0 {
+    color: red;
+}
+
+.colorStar1 {
+    color: orange;
+}
+
+.colorStar2 {
+    color: yellow;
+}
+
+.colorStar3 {
+    color: blue;
+}
+
+.colorStar4 {
+    color: green;
+}
+
+.colorStar5 {
+    color: darkgreen;
+}
+
+.ratingText{
+    display: block;
+    margin-top: -1.6rem;
+    font-weight: bold;
+}
+.eachSubject{
+    background-color: lightgoldenrodyellow;
+    border: 1px solid black;
+    border-radius: 1rem;
+    list-style: none;
+}
