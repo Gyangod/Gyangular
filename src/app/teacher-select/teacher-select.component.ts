@@ -50,4 +50,7 @@ export class TeacherSelectComponent implements OnInit {
   changeMenuIconToBack(menuIcon: boolean): void {
     this.globalService.setMenuIcon(menuIcon);
   }
+  selectedTeacher(index: number): void {
+    console.log(index);
+  }
 }

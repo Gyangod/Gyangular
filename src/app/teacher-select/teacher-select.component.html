@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-xl-4 col-sm-6 col-12 mainDivSelect" *ngFor="let teacher of teachers">
+    <div class="col-xl-4 col-sm-6 col-12 mainDivSelect" *ngFor="let teacher of teachers; let t=index">
         <div class="card text-center">
             <div class="card-header teacherName" tabindex="0" data-toggle="tooltip" title="{{ teacher.name }}">
                 <span style="pointer-events: none;">{{ teacher.name }}</span>
@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-8 row">
-                        <ul class="col-4 subjectUl" *ngFor="let subject of teacher.subjects">
+                        <ul class="col-6 subjectUl" *ngFor="let subject of teacher.subjects">
                             <li class="eachSubject">{{subject}}</li>
                         </ul>
                     </div>
@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button class="btn btn-primary">Select</button>
+                <button class="btn btn-primary" (click)="selectedTeacher({t})">Select</button>
             </div>
         </div>
     </div>
