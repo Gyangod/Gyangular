@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from "./home.component";
 import { TeacherSelectComponent } from '../teacher-select/teacher-select.component';
+import { TeacherPreviewComponent } from '../teacher-preview/teacher-preview.component';
 
 const routes: Routes = [
 {
@@ -12,6 +13,10 @@ const routes: Routes = [
 {
   path: 'select',
   component: TeacherSelectComponent,
+},
+{
+  path: 'batch',
+  component: TeacherPreviewComponent,
 }
 ];
 

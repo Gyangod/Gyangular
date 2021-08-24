@@ -1,5 +1,6 @@
 import { Component, OnInit,HostListener } from '@angular/core';
 import {GlobalService} from '../global/global.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-teacher-select',
@@ -33,7 +34,7 @@ export class TeacherSelectComponent implements OnInit {
     price: [{span: 'weekly', rate: 500},{span:'monthly', rate: 2000}]
   },
 ];
-  constructor(private globalService: GlobalService) { 
+  constructor(private globalService: GlobalService,private router: Router) { 
     this.changeMenuIconToBack(false);
   }
 
@@ -50,7 +51,8 @@ export class TeacherSelectComponent implements OnInit {
   changeMenuIconToBack(menuIcon: boolean): void {
     this.globalService.setMenuIcon(menuIcon);
   }
-  selectedTeacher(index: number): void {
+  selectedTeacher(index: any): void {
     console.log(index);
+    this.router.navigateByUrl('/home/batch',index);
   }
 }
