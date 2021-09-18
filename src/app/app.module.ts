@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,9 +15,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { InitialViewComponent } from './initial-view/initial-view.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
-// import { TeacherselectComponent } from './teacherselect/teacherselect.component';
 import { VotingGroupComponent } from './voting-group/voting-group.component';
-// import {GlobalService} from './global/global.service';
 
 
 @NgModule({
@@ -38,7 +37,7 @@ import { VotingGroupComponent } from './voting-group/voting-group.component';
     MatSlideToggleModule,
     CommonModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    
+    HttpClientModule
 
   ],
   providers: [

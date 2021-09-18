@@ -61,6 +61,10 @@
  */
 import 'zone.js/dist/zone';  // Included with Angular CLI.
 
+/* @auth0/angular-jwt library relies on the URL interface which is not supported in IE11. */
+
+import 'url-polyfill';  //npm i --save url-polyfill
+
 
 /***************************************************************************************************
  * APPLICATION IMPORTS

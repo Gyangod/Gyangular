@@ -31,6 +31,7 @@
     "@angular/platform-server": "^12.0.0",
     "@angular/router": "^12.0.0",
     "@angular/service-worker": "^12.0.0",
+    "@auth0/angular-jwt": "^5.0.2",
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@ng-bootstrap/ng-bootstrap": "^9.1.1",
     "@ng-select/ng-select": "^7.2.0",
@@ -42,6 +43,7 @@
     "ngx-material-timepicker": "^5.5.3",
     "rxjs": "~6.5.3",
     "tslib": "^2.2.0",
+    "url-polyfill": "^1.1.12",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
