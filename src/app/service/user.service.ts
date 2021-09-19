@@ -14,14 +14,8 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  //todo: fix with backend
-
   public getUsers(param: HttpParams): Observable<User[] | HttpErrorResponse> {
     return this.http.get<User[]>(`${this.host}/user/get/all`,{params: param});
-  }
-
-  public addUser(user: User): Observable<User> {
-    return this.http.post<User>(`${this.host}/user/register`, user);
   }
 
   public updateUser(user: User,username: String): Observable<User> {

@@ -22,7 +22,7 @@ export class User {
       this.countryCode = '';
       this.contactNumber = '';
       this.password = '';
-      this.role = 'ROLE_STUDENT';
+      this.role = '';
       this.authorities = [];
       this.profilePic = '';
       this.jwtToken = '';

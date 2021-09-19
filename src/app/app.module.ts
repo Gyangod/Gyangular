@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,6 +16,10 @@ import { InitialViewComponent } from './initial-view/initial-view.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { VotingGroupComponent } from './voting-group/voting-group.component';
+import { AuthenticationService } from './service/authentication.service';
+import { UserService } from './service/user.service';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
+import { AuthenticationGuard } from './guard/authentication.guard';
 
 
 @NgModule({
@@ -41,7 +45,10 @@ import { VotingGroupComponent } from './voting-group/voting-group.component';
 
   ],
   providers: [
-    // GlobalService
+    AuthenticationService,
+    UserService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    AuthenticationGuard,
   ],
   bootstrap: [
     AppComponent
