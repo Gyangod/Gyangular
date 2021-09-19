@@ -33,6 +33,10 @@ export class AuthenticationService {
     localStorage.removeItem('users');
   }
 
+  public getLoggedInUsername(): string {
+    return this.loggedInUsername;
+  }
+
   public saveToken(token: string): void {
     this.token = token;
     localStorage.setItem('token', token);
