@@ -20,6 +20,8 @@ import { AuthenticationService } from './service/authentication.service';
 import { UserService } from './service/user.service';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { AuthenticationGuard } from './guard/authentication.guard';
+import { NotificationModule } from './notification.module';
+import { NotificationService } from './service/notification.service';
 
 
 @NgModule({
@@ -28,7 +30,6 @@ import { AuthenticationGuard } from './guard/authentication.guard';
     InitialViewComponent,
     SignupComponent,
     LoginComponent,
-    // TeacherselectComponent,
     VotingGroupComponent,
   ],
   imports: [
@@ -41,20 +42,21 @@ import { AuthenticationGuard } from './guard/authentication.guard';
     MatSlideToggleModule,
     CommonModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    HttpClientModule
-
+    HttpClientModule,
+    NotificationModule
   ],
   providers: [
     AuthenticationService,
     UserService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     AuthenticationGuard,
+    NotificationService,
   ],
   bootstrap: [
     AppComponent
   ],
   exports: [
-    
+
   ]
 })
 export class AppModule { }
