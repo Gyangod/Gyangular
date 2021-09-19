@@ -1,12 +1,25 @@
 import { TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NotificationService } from '../service/notification.service';
 import { AuthenticationGuard } from './authentication.guard';
+import { NotifierService,ɵa } from 'angular-notifier';
 
 describe('AuthenticationGuard', () => {
   let guard: AuthenticationGuard;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule    
+      ],
+      providers: [
+        NotifierService,
+        ɵa,
+        NotificationService
+      ]
+    });
     guard = TestBed.inject(AuthenticationGuard);
   });
 
