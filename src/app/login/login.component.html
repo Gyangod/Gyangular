@@ -1,24 +1,69 @@
-<form>
-  <div class="loginBodyDiv">
-    <div class="form-group divUsername">
-      <label for="inputUsername">Username or Email</label>
-      <input type="text" class="form-control" id="inputUsername" placeholder="Enter Username">
-    </div>
-    <div class="form-group divPassword">
-      <label for="inputPassword">Password</label>
-      <div class="input-group-append">
-        <input [type]="fieldTextType ? 'text' : 'password'" class="form-control" id="inputPassword"
-          placeholder="Enter Password">
-        <span class="input-group-text" (click)="toggleFieldTextType()">
-          <i class="fa" [ngClass]="{'fa-eye-slash': !fieldTextType, 'fa-eye': fieldTextType }"></i>
-        </span>
+<div class="container" class="loginMainDiv">
+  <div class="card col-12 col-sm-12 offset-md-2 col-md-8 offset-lg-3 col-lg-6 loginDiv">
+    <div class="card-body">
+      <h2 class="card-title">Login or <a href="/signup">Sign up</a></h2>
+      <p class="text-muted">Sign in to your account</p>
+      <div class="row socialBtn">
+        <div class="offset-1 col-4">
+          <a href="#" class="btn btn-lg btn-block facebookBtn">
+            <i class="fab fa-facebook-f d-block d-sm-none"></i>
+            <span class="d-none d-sm-block">Facebook</span>
+          </a>
+        </div>
+        <div class="offset-2 col-4">
+          <a href="#" class="btn btn-lg btn-block googleBtn">
+            <i class="fab fa-google d-block d-sm-none"></i>
+            <span class="d-none d-sm-block">Google</span>
+          </a>
+        </div>
+      </div>
+      <div class="row" style="margin-bottom:1em;">
+        <div class="col-12">
+          <hr class="hrLineOr">
+          <span class="loginOr">or</span>
+        </div>
+      </div>
+      <div class="row d-flex">
+        <div class="offset-1 col-10 offset-md-2 col-md-8">
+          <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm.value)">
+            <div class="input-group mb-3">
+              <div class="input-group-append">
+                <span class="input-group-text inputIcons"><i class="fas fa-user"></i></span>
+              </div>
+              <input type="text" class="form-control" name="userName" placeholder="Username" ngModel
+                #usernameInput="ngModel" required>
+            </div>
+            <span class="help-block" style="color:red;" *ngIf="usernameInput.invalid && usernameInput.touched">Please
+              enter a username</span>
+            <div class="input-group mb-2">
+              <div class="input-group-append">
+                <span class="input-group-text inputIcons"><i class="fas fa-key"></i></span>
+              </div>
+              <input type="password" class="form-control" name="password" placeholder="Password" ngModel
+                #passwordInput="ngModel" required>
+            </div>
+            <span class="help-block" style="color:red;" *ngIf="passwordInput.invalid && passwordInput.touched">Please
+              enter a password.</span>
+            <div class="d-flex justify-content-center mt-3 login_container">
+              <button type="submit" [disabled]="loginForm.invalid || showLoading" name="button" class="btn btn-primary">
+                <span [hidden]="showLoading">Login</span>
+                <i [hidden]="!showLoading" class="fas fa-spinner fa-spin"></i>
+                <span [hidden]="!showLoading">&nbsp;&nbsp;Loading...</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-5">
+          <label class="checkbox">
+            <input type="checkbox" [(ngModel)]="rememberMe"> Remember Me
+          </label>
+        </div>
+        <div class="col-xs-12 offset-md-2 col-md-5">
+          <p class="forgotPwd">
+            <a href="#">Forgot password?</a>
+          </p>
+        </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary" style="margin-bottom: 1rem;">Submit</button>
-  </div>
-</form>
-<div class="loginSignupDiv">
-  <h3>Do not have a account?</h3>
-  <button class="btn btn-outline-secondary" [routerLink]="'/signup'" routerLinkActive="router-link-active">Sign
-    up</button>
-</div>

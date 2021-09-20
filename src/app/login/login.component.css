@@ -1,9 +1,44 @@
-.loginBodyDiv{
-  width: 50%;
-  margin-left: 22%;
-  margin-top: 5rem;
+.socialBtn a {
+  color: white;
+  opacity: 0.9;
 }
-.loginSignupDiv{
+
+.socialBtn a:hover {
+  color: white;
+  opacity: 1;
+}
+
+.loginMainDiv {
+  margin-top: 10rem;
+}
+
+.loginDiv{
   text-align: center;
-  height: 15rem;
+  background-color: beige;
+}
+
+.facebookBtn {
+  background: #3b5998;
+}
+
+.googleBtn {
+  background: #c32f10;
+}
+
+.loginOr {
+  font-size: 1.5em;
+  color: #aaa;
+}
+
+.hrLineOr {
+  background-color: #aaa;
+  height: 1px;
+  margin-bottom: 0px !important;
+}
+
+.inputIcons {
+  padding: .650rem .75rem;
+}
+.forgotPwd{
+  text-align: center;
 }
