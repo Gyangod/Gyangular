@@ -22,6 +22,7 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { AuthenticationGuard } from './guard/authentication.guard';
 import { NotificationModule } from './notification.module';
 import { NotificationService } from './service/notification.service';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { NotificationService } from './service/notification.service';
     CommonModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     HttpClientModule,
-    NotificationModule
+    NotificationModule,
+    NgSelectModule
   ],
   providers: [
     AuthenticationService,

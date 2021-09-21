@@ -1,77 +1,132 @@
-<div style="overflow-x: hidden;padding: 1%;">
-  <div class="signUpMainDiv">
-    <h3>Already a member?</h3>
-    <button class="btn btn-outline-secondary" [routerLink]="'/login'"
-      routerLinkActive="router-link-active">Login</button>
-  </div>
-  <form>
-    <!-- <div class="signUpBodyDiv"> -->
-    <div class="row" style="overflow-x: hidden;">
-      <div class="offset-md-1 col-md-5 col-12">
-        <div class="form-group divUsername">
-          <label for="inputUsername">Username</label>
-          <input type="text" class="form-control" id="inputUsername" placeholder="Enter Username">
-        </div>
-        <div class="form-group divFirstName">
-          <label for="inputFirstName">First Name</label>
-          <input type="text" class="form-control" id="inputFirstName" placeholder="Enter Name">
-        </div>
-        <div class="form-group divLastName">
-          <label for="inputLastName">Last Name</label>
-          <input type="text" class="form-control" id="inputLastName" placeholder="Enter Surname">
-        </div>
-        <div class="form-group">
-          <label for="inputEmail">Email address</label>
-          <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
-            placeholder="Enter Email">
-          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-        </div>
-        <div class="row">
-          <div class="form-group col-md-3 col-4">
-            <label for="inputCountryCode">Country Code</label>
-            <input type="text" class="form-control" id="inputCountryCode" placeholder="Ex: +91">
-          </div>
-          <div class="form-group offset-md-1 col-md-8">
-            <label for="inputPhoneNumber">Contact Number</label>
-            <input type="text" class="form-control" id="inputPhoneNumber" placeholder="Enter Contact Number">
-          </div>
-        </div>
-
-        <div class="form-group divPassword">
-          <label for="inputPassword">Password</label>
-          <div class="input-group-append">
-            <input class="form-control" id="inputPassword" type="password" placeholder="Enter Password">
-          </div>
-        </div>
-        <div class="form-group divPassword">
-          <label for="inputConfirmPassword">Confirm Password</label>
-          <input type="password" class="form-control" id="inputConfirmPassword" placeholder="Enter Password Again">
-        </div>
+<div class="container signUpMainDiv">
+  <div class="card row">
+    <div class="card-body">
+      <div class="signUpUpperDiv">
+        <h3>Already a member?</h3>
+        <button class="btn btn-outline-secondary" [routerLink]="'/login'"
+          routerLinkActive="router-link-active">Login</button>
       </div>
-      <div class="offset-md-1 col-md-4 col-12">
-        <div class="card text-center">
-          <div class="card-header">
-            Featured
+      <form #registerForm="ngForm" ngNativeValidate (ngSubmit)="onRegister(registerForm.value)">
+        <div class="offset-md-2 col-md-8 offset-lg-3 col-lg-6 col-12">
+          <!-- userName -->
+          <div class="input-group mt-3">
+            <div class="input-group-append">
+              <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
+                title="Enter unique username"><i class="fas fa-user"></i></span>
+            </div>
+            <input type="text" class="form-control" name="userName" id="inputUsername" placeholder="Username" ngModel
+              #usernameInput="ngModel" [disabled]="usernameTick" pattern="^[a-z0-9_]{5,50}$" required>
+            <div class="input-group-append" *ngIf="!usernameTick">
+              <button class="input-group-text btn btn-outline-primary" [disabled]="usernameInput.invalid"
+                (click)="checkUserName()">Check</button>
+            </div>
+            <span class="inputCheck" *ngIf="usernameTick"><i class="fas fa-check"></i></span>
           </div>
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+          <span class="help-block" style="color:red;" *ngIf="usernameInput.invalid && usernameInput.touched">Please
+            enter a username with 5 characters of alphabet and numbers</span>
+          <span class="help-block" style="color:red;" *ngIf="firstNameInput.invalid && firstNameInput.touched">Please
+            enter your name</span>
+          <!-- firstName -->
+          <div class="input-group my-3 divFirstName">
+            <div class="input-group-append">
+              <span class="input-group-text inputIcons"><i class="fas fa-user-tie"></i></span>
+            </div>
+            <input type="text" class="form-control" id="inputFirstName" placeholder="First Name" name="firstName"
+              ngModel #firstNameInput="ngModel" pattern="^[A-Za-z]{3,30}$" required>
           </div>
-          <div class="card-footer text-muted">
-            2 days ago
+          <!-- lastName -->
+          <div class="input-group my-3 divLastName">
+            <div class="input-group-append">
+              <span class="input-group-text inputIcons"><i class="fas fa-user-tag"></i></span>
+            </div>
+            <input type="text" class="form-control" id="inputLastName" placeholder="Last Name" name="lastName" ngModel>
+          </div>
+          <!-- emailAddress -->
+          <div class="input-group">
+            <div class="input-group-append">
+              <span class="input-group-text inputIcons"><i class="fas fa-envelope"></i></span>
+            </div>
+            <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" ngModel
+              placeholder="Enter Email" name="emailAddress" #emailInput="ngModel"
+              pattern="^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$" required>
+          </div>
+          <small id="emailHelp" style="display: block;" class="text-muted">We'll never share your email with anyone
+            else.</small>
+          <span class="help-block" style="color:red;" *ngIf="emailInput.invalid && emailInput.touched">Please
+            enter a valid email id</span>
+          <!-- countryCode -->
+          <div class="input-group mt-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text inputIcons">Country Code</label>
+            </div>
+            <ng-select class="form-control" ngModel name="countryCode">
+              <ng-option [disabled]="true" value="">Select</ng-option>
+              <ng-option *ngFor="let item of countryCodes | keyvalue" [value]="item.value">{{item.key}}</ng-option>
+            </ng-select>
+          </div>
+          <!-- contactNumber -->
+          <div class="input-group mt-3">
+            <div class="input-group-append">
+              <span class="input-group-text inputIcons"><i class="fas fa-mobile-alt"></i></span>
+            </div>
+            <input type="text" class="form-control" id="inputPhoneNumber" placeholder="Contact Number" ngModel
+              name="contactNumber">
+          </div>
+          <!-- password -->
+          <div class="input-group  mt-3">
+            <div class="input-group-append">
+              <span class="input-group-text inputIcons"><i class="fas fa-key"></i></span>
+            </div>
+            <input class="form-control" #inputPassword type="password" placeholder="Password" ngModel name="password"
+              #passwordInput="ngModel" pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$"
+              required>
+            <div class="input-group-append" (click)="togglePasswordText(inputPassword)">
+              <button class="input-group-text passwordinputIcons">
+                <span *ngIf="!passwordText"><i class="far fa-eye"></i></span>
+                <span *ngIf="passwordText"><i class="far fa-eye-slash"></i></span>
+              </button>
+            </div>
+          </div>
+          <span class="help-block" style="color:red;" *ngIf="passwordInput.invalid && passwordInput.touched">Password
+            of minimum 8 character must contains: <ul>
+              <li>Must contain an uppercase letter</li>
+              <li>Must contain an lowercase letter</li>
+              <li>Must contain a number</li>
+              <li>Must contain a special character</li>
+            </ul>
+          </span>
+          <!-- confirmPassword -->
+          <div class="input-group  mt-3">
+            <div class="input-group-append">
+              <span class="input-group-text inputIcons"><i class="fas fa-check-double"></i></span>
+            </div>
+            <input class="form-control" #confirmPassword type="password" name="confirmPass"
+              placeholder="Confirm Password" ngModel #confirmPass="ngModel" required>
+            <div class="input-group-append">
+              <span class="input-group-text passwordinputIcons" (click)="toggleConfirmPasswordText(confirmPassword)">
+                <span *ngIf="!confirmpasswordText"><i class="far fa-eye"></i></span>
+                <span *ngIf="confirmpasswordText"><i class="far fa-eye-slash"></i></span>
+              </span>
+            </div>
+          </div>
+          <span class="help-block" style="color:red;"
+            *ngIf="(passwordInput.value != confirmPass.value) && confirmPass.touched">Password
+            and Confirm Password must match</span>
+          <!-- termsCheckBox -->
+          <div class="form-check mt-3">
+            <label class="form-check-label" for="termsCheck">
+              <input type="checkbox" class="form-check-input" id="termsCheck" style="margin-top:0.7em;" required>
+              I accept<button class="btn btn-link">Terms and Condition</button>
+            </label>
+          </div>
+          <div style="text-align:center" class="mt-3">
+            <button type="reset" class="btn btn-secondary" style="margin-right: 1.5em;" (click)="resetAll()">
+              Reset</button>
+            <button type="submit" [disabled]="registerForm.invalid"
+              class="btn btn-primary btn-lg">Submit</button>
           </div>
         </div>
-      </div>
-      <div class="offset-md-1 col-md-5 col-12">
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="termsCheck">
-          <label class="form-check-label" for="termsCheck">
-            I accept<button class="btn btn-link">Terms and Condition</button>
-          </label>
-        </div>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </div>
-  </form>
+  </div>
 </div>
