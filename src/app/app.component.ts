@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {Location} from '@angular/common';
-import {GlobalService} from './global/global.service';
+import { Location } from '@angular/common';
+import { GlobalService } from './global/global.service';
+import { AuthenticationService } from './service/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -11,16 +12,19 @@ import {GlobalService} from './global/global.service';
 export class AppComponent implements OnInit {
   title = 'Gyangod';
   checked: Boolean = false;
-  barIcon: Boolean  = true;
-  bottomPanel: boolean  = false;
+  barIcon: Boolean = true;
+  bottomPanel: boolean = false;
   bottomSub: any;
   menuSub: any;
-  constructor(private router: Router,private globalService:GlobalService,private _location:Location) {
+  constructor(private router: Router, private globalService: GlobalService, private _location: Location, private authenticationService: AuthenticationService) {
     // this.intializeValues();
-   }
+  }
 
   ngOnInit(): void {
     this.subscribeConstructions();
+    if (this.authenticationService.isUserLoggedIn()) {
+      this.router.navigateByUrl('/home');
+    }
   }
   // ngOnChanges(): void {}
   ngOnDestroy(): void {
@@ -33,12 +37,12 @@ export class AppComponent implements OnInit {
   //   this.globalService.setMenuIcon(true);
   // }
 
-  subscribeConstructions(){
-    this.bottomSub = this.globalService.getBotttomNav().subscribe(botttom =>{
+  subscribeConstructions() {
+    this.bottomSub = this.globalService.getBotttomNav().subscribe(botttom => {
       this.bottomPanel = botttom;
       // console.log(this.bottomPanel);
     });
-    this.menuSub = this.globalService.getMenuIcon().subscribe(menuIcon =>{
+    this.menuSub = this.globalService.getMenuIcon().subscribe(menuIcon => {
       this.barIcon = menuIcon;
     });
   }

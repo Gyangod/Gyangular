@@ -21,8 +21,12 @@ export class AuthenticationService {
     return this.http.post<User>(`${this.host}/user/login`, user, { observe: 'response' });
   }
 
-  public register(user: User): Observable<User> {
-    return this.http.post<User>(`${this.host}/user/register`, user);
+  public register(user: User): Observable<HttpResponse<User>> {
+    return this.http.post<User>(`${this.host}/user/register`, user, { observe: 'response' });
+  }
+  public getCountryCodes(): Observable<Map<string, string>> {
+    console.log("get called");
+    return this.http.get<Map<string, string>>(`${this.host}/user/get/country/codes`);
   }
 
   public logOut(): void {
@@ -60,7 +64,7 @@ export class AuthenticationService {
 
   public isUserLoggedIn(): boolean {
     this.loadToken();
-    if (this.token != null && this.token !== ''){
+    if (this.token != null && this.token !== '') {
       if (this.jwtHelper.decodeToken(this.token).sub != null || '') {
         if (!this.jwtHelper.isTokenExpired(this.token)) {
           this.loggedInUsername = this.jwtHelper.decodeToken(this.token).sub;
@@ -71,5 +75,17 @@ export class AuthenticationService {
       this.logOut();
       return false;
     }
+  }
+
+  public addCodesToLocalCache(code: Map<string, string>): void {
+    localStorage.setItem('code', JSON.stringify(code));
+  }
+
+  public loadCodes(): Map<string, string> {
+    return JSON.parse(localStorage.getItem('code'));
+  }
+
+  public deleteCodes(): void {
+    localStorage.removeItem('code');
   }
 }
