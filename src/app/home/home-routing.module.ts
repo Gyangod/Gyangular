@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from "./home.component";
 import { TeacherSelectComponent } from '../teacher-select/teacher-select.component';
 import { TeacherPreviewComponent } from '../teacher-preview/teacher-preview.component';
+import { AuthenticationGuard } from '../guard/authentication.guard';
 
 const routes: Routes = [
 {
@@ -17,6 +18,11 @@ const routes: Routes = [
 {
   path: 'batch',
   component: TeacherPreviewComponent,
+},
+{
+  path: 'pack',
+  loadChildren: () => import('../package-control/package-control.module').then(m => m.PackageControlModule),
+  canActivate: [AuthenticationGuard]
 }
 ];
 

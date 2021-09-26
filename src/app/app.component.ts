@@ -16,13 +16,15 @@ export class AppComponent implements OnInit {
   bottomPanel: boolean = false;
   bottomSub: any;
   menuSub: any;
+  loggedIn: boolean = false;
   constructor(private router: Router, private globalService: GlobalService, private _location: Location, private authenticationService: AuthenticationService) {
     // this.intializeValues();
   }
 
   ngOnInit(): void {
     this.subscribeConstructions();
-    if (this.authenticationService.isUserLoggedIn()) {
+    this.loggedIn = this.authenticationService.isUserLoggedIn();
+    if (this.loggedIn) {
       this.router.navigateByUrl('/home');
     }
   }

@@ -7,6 +7,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from "./home.component";
 import { TeacherSelectComponent } from '../teacher-select/teacher-select.component';
 import { TeacherPreviewComponent } from '../teacher-preview/teacher-preview.component';
+import { PackageControlModule } from '../package-control/package-control.module';
 // import {GlobalService} from '../global/global.service';
 
 @NgModule({
@@ -19,6 +20,7 @@ import { TeacherPreviewComponent } from '../teacher-preview/teacher-preview.comp
     HomeRoutingModule,
     TimePickerModule,
     NgSelectModule,
+    PackageControlModule,
   ],
   providers: [
     // GlobalService,

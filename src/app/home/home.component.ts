@@ -32,4 +32,14 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl('/home/select');
   }
 
+  packageCreate(){
+    let m = "LEARN"
+    this.router.navigateByUrl('/home/pack/create/'+m);
+  }
+
+  packageUpdate(){
+    let m = "object"
+    this.router.navigateByUrl('/home/pack/update/'+m);
+  }
+
 }
