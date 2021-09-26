@@ -35,8 +35,7 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl('/home/select');
   }
 
-  packageCreate(){
-    let m = "LEARN"
+  packageCreate(m:String){
     this.router.navigateByUrl('/home/pack/create/'+m);
   }
 

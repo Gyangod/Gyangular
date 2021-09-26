@@ -1,9 +1,8 @@
 <div class="container">
-  <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+  <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills nav-fill mt-3 border border-primary rounded">
     <li [ngbNavItem]="1">
       <a ngbNavLink>Student</a>
       <ng-template ngbNavContent>
-        <!-- <ng-content-1>hello</ng-content-1> -->
         <div class="row">
           <div class="card col-12 col-md-8 mt-3">
             <div class="card-body">
@@ -51,7 +50,7 @@
           </div>
           <div class="col-12 offset-md-1 col-md-3 mt-3">
             <div>
-              <button type="submit" class="btn btn-primary" (click)="packageCreate()"> Create </button>
+              <button type="submit" class="btn btn-primary" (click)="packageCreate('LEARN')"> Create </button>
               <button type="submit" class="btn btn-secondary" (click)="packageUpdate()"> Update </button>
             </div>
           </div>
@@ -61,9 +60,9 @@
     <li [ngbNavItem]="2">
       <a ngbNavLink>Teacher</a>
       <ng-template ngbNavContent>
-        hi
+        <button type="submit" class="btn btn-primary" (click)="packageCreate('TEACH')"> Create </button>
       </ng-template>
     </li>
   </ul>
-
+  <div [ngbNavOutlet]="nav"></div>
 </div>

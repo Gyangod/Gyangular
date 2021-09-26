@@ -8,7 +8,7 @@ import { HomeComponent } from "./home.component";
 import { TeacherSelectComponent } from '../teacher-select/teacher-select.component';
 import { TeacherPreviewComponent } from '../teacher-preview/teacher-preview.component';
 import { PackageControlModule } from '../package-control/package-control.module';
-import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // import {GlobalService} from '../global/global.service';
 
 @NgModule({
@@ -22,7 +22,7 @@ import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
     TimePickerModule,
     NgSelectModule,
     PackageControlModule,
-    NgbNavModule
+    NgbModule
   ],
   providers: [
     // GlobalService,
