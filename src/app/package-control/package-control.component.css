@@ -1,0 +1,30 @@
+.example-container {
+    text-align: center;
+    overflow: auto;
+}
+
+.customTable {
+    width: 100%;
+}
+
+.actionButtons {
+    margin-right: .75em;
+}
+
+.mat-cell {
+    padding: 0 1em;
+}
+
+.mat-header-cell {
+    text-align: center;
+    padding: 0 1em;
+    font-weight: bold;
+}
+
+.mat-table-sticky-border-elem-left {
+    border-right: 1px solid #e0e0e0;
+}
+
+.testClass {
+    padding: 12em;
+}
