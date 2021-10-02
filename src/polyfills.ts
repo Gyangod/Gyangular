@@ -65,6 +65,10 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 
 import 'url-polyfill';  //npm i --save url-polyfill
 
+//Due to ERROR ReferenceError: $localize is not defined
+
+import '@angular/localize/init';
+
 
 /***************************************************************************************************
  * APPLICATION IMPORTS
