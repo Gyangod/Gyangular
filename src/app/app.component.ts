@@ -22,11 +22,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("this is called");
     this.subscribeConstructions();
-    this.loggedIn = this.authenticationService.isUserLoggedIn();
-    if (this.loggedIn) {
-      this.router.navigateByUrl('/home');
-    }
   }
   // ngOnChanges(): void {}
   ngOnDestroy(): void {

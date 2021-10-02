@@ -38,8 +38,8 @@ const routes: Routes = [
   },
   {
     path: 'calendar',
-    loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarPersonalModule)
-    // component: CalendarComponent,
+    loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarPersonalModule),
+    canActivate: [AuthenticationGuard]
   }
 ];
 
