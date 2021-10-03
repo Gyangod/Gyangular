@@ -22,8 +22,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("this is called");
     this.subscribeConstructions();
+    this.globalService.setBotttomNav(false);
+    if (this.authenticationService.isUserLoggedIn()) {
+      this.globalService.setBotttomNav(true);
+    }else {
+      this.globalService.setBotttomNav(false);
+    }
   }
   // ngOnChanges(): void {}
   ngOnDestroy(): void {
