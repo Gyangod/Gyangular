@@ -174,26 +174,36 @@
                             <div id="{{'collapse'+i}}" class="accordion-collapse collapse"
                                 [attr.aria-labelledby]="'heading'+i" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    <div class="input-group" style="width: 75%">
+                                    <div class="input-group">
                                         <div class="input-group-append">
                                             <span class="input-group-text inputIcons" data-toggle="tooltip"
                                                 data-placement="top" title="Enter unique username"><i
                                                     class="fas fa-chalkboard"></i></span>
                                         </div>
                                         <input type="text" class="form-control" placeholder="Batch Name"
-                                            [(ngModel)]="map.key" pattern="^[A-Za-z0-9_ ]$" required>
+                                            [ngModel]="map.key" (change)="onMapKeyChange($event.target.value,map.key)" pattern="^[A-Za-z0-9_ ]$" required>
+                                        <button class="btn btn-success" style="margin-left:1em;"
+                                            (click)="openModal()">
+                                            <i class="fas fa-plus"></i>&nbsp;Add
+                                        </button>
                                     </div>
+
+
                                     <div class="example-container">
                                         <table mat-table [dataSource]="map.value" class="customTable">
 
                                             <!-- Name Column -->
                                             <ng-container matColumnDef="actions" sticky>
                                                 <th mat-header-cell *matHeaderCellDef> Actions </th>
-                                                <td mat-cell *matCellDef="let element">
-                                                    <button class="btn btn-secondary actionButtons"> <i
-                                                            class="fas fa-pen"></i>
+                                                <td mat-cell *matCellDef="let element; let j = index">
+                                                    <button class="btn btn-secondary actionButtons"
+                                                        (click)="editOccurence(map.key,j)">
+                                                        <i class="fas fa-pen"></i>
                                                     </button>
-                                                    <!-- <button class="btn btn-danger actionButtons" > <i class="fas fa-trash-alt"></i> </button> -->
+                                                    <button class="btn btn-danger actionButtons"
+                                                        (click)="deleteOccurence(map.key,j)">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
                                                 </td>
                                             </ng-container>
 

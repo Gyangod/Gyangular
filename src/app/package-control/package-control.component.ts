@@ -1,57 +1,12 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PackageOccurence } from '../model/package-occurence';
+import { OccurenceComponent } from '../modal/occurence/occurence.component';
+import { OccurenceConfig } from '../modal/occurence/occurence.config';
 import { NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { CustomAdapter, CustomDateParserFormatter } from '../global/global.datepicker';
+import { MatDialog } from '@angular/material/dialog';
 
-/**
- * This Service handles how the date is represented in scripts i.e. ngModel.
- */
-@Injectable()
-export class CustomAdapter extends NgbDateAdapter<string> {
-
-  readonly DELIMITER = '/';
-
-  fromModel(value: string | null): NgbDateStruct | null {
-    if (value) {
-      let date = value.split(this.DELIMITER);
-      return {
-        day: parseInt(date[0], 10),
-        month: parseInt(date[1], 10),
-        year: parseInt(date[2], 10)
-      };
-    }
-    return null;
-  }
-
-  toModel(date: NgbDateStruct | null): string | null {
-    return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : null;
-  }
-}
-
-/**
- * This Service handles how the date is rendered and parsed from keyboard i.e. in the bound input field.
- */
-@Injectable()
-export class CustomDateParserFormatter extends NgbDateParserFormatter {
-
-  readonly DELIMITER = '/';
-
-  parse(value: string): NgbDateStruct | null {
-    if (value) {
-      let date = value.split(this.DELIMITER);
-      return {
-        day: parseInt(date[0], 10),
-        month: parseInt(date[1], 10),
-        year: parseInt(date[2], 10)
-      };
-    }
-    return null;
-  }
-
-  format(date: NgbDateStruct | null): string {
-    return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : '';
-  }
-}
 
 @Component({
   selector: 'app-package-control',
@@ -84,7 +39,26 @@ export class PackageControlComponent implements OnInit {
   courseEnabler: boolean = false;
   scheduleEnabler: boolean = true;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) { 
+  constructor(private router: Router, private activatedRoute: ActivatedRoute,public dialog: MatDialog) {
+  }
+
+  openModal() : void{
+    // const modalConfig: OccurenceConfig = {
+    //   dialogHeader: "Hello World"
+    // };
+    const dialogInterface: OccurenceConfig = {
+      dialogHeader: 'I am created by Reusable dialog',
+      dialogContent: 'I am second dialog',
+      cancelButtonLabel: 'Cancel',
+      confirmButtonLabel: 'Submit',
+      callbackMethod: () => {
+        this.performDialogSubmitMethodOne();
+      },
+    };
+    this.dialog.open(OccurenceComponent, {
+      width: '30em',
+      data: dialogInterface,
+    });
   }
 
   ngOnInit(): void {
@@ -97,8 +71,32 @@ export class PackageControlComponent implements OnInit {
 
   }
 
-  addPackOccurence(){
-    this.ELEMENT_DATA.set("",null);
+  addPackOccurence() {
+    this.ELEMENT_DATA.set("please change", null);
   }
+
+  editOccurence(key: string, value: number): void {
+    console.log("Edit map at index: " + key + " value: " + value);
+  }
+
+  deleteOccurence(key: string, value: number): void {
+    console.log("Delete map at index: " + key + " value: " + value);
+  }
+
+  addOccurence(key: string): void {
+    console.log("key: " + key);
+  }
+
+  onMapKeyChange(value: string, index: string): void {
+    let pack: PackageOccurence[] = this.ELEMENT_DATA.get(index);
+    this.ELEMENT_DATA.delete(index);
+    this.ELEMENT_DATA.set(value, pack);
+    console.log(this.ELEMENT_DATA.keys());
+  }
+
+  performDialogSubmitMethodOne() {
+    console.log("ok");
+  }
+
 
 }

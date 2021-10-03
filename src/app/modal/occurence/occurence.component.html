@@ -1,0 +1,14 @@
+<div>
+  <h1 mat-dialog-title>{{ dialogData.dialogHeader }}</h1>
+  <div mat-dialog-content>
+    <p>{{ dialogData.dialogContent }}</p>
+  </div>
+  <div mat-dialog-actions>
+    <button (click)="handleDialogSubmit()">
+      {{ dialogData.confirmButtonLabel }}
+    </button>
+    <button (click)="closeDialog()" color="accent">
+      {{ dialogData.cancelButtonLabel }}
+    </button>
+  </div>
+</div>
