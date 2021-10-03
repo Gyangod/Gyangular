@@ -4,7 +4,7 @@
     <p>{{ dialogData.dialogContent }}</p>
   </div>
   <div mat-dialog-actions>
-    <button (click)="handleDialogSubmit()">
+    <button [mat-dialog-close]="'hello'">
       {{ dialogData.confirmButtonLabel }}
     </button>
     <button (click)="closeDialog()" color="accent">

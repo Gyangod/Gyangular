@@ -3,5 +3,4 @@ export interface OccurenceConfig {
     confirmButtonLabel: string;
     dialogHeader: string;
     dialogContent: string;
-    callbackMethod: () => void;
 }

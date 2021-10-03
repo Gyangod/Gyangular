@@ -43,21 +43,20 @@ export class PackageControlComponent implements OnInit {
   }
 
   openModal() : void{
-    // const modalConfig: OccurenceConfig = {
-    //   dialogHeader: "Hello World"
-    // };
     const dialogInterface: OccurenceConfig = {
       dialogHeader: 'I am created by Reusable dialog',
       dialogContent: 'I am second dialog',
       cancelButtonLabel: 'Cancel',
-      confirmButtonLabel: 'Submit',
-      callbackMethod: () => {
-        this.performDialogSubmitMethodOne();
-      },
+      confirmButtonLabel: 'Submit'
     };
-    this.dialog.open(OccurenceComponent, {
+    const dialogRef = this.dialog.open(OccurenceComponent, {
       width: '30em',
       data: dialogInterface,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result !== undefined) {
+        console.log(result);
+      }
     });
   }
 
@@ -93,10 +92,4 @@ export class PackageControlComponent implements OnInit {
     this.ELEMENT_DATA.set(value, pack);
     console.log(this.ELEMENT_DATA.keys());
   }
-
-  performDialogSubmitMethodOne() {
-    console.log("ok");
-  }
-
-
 }

@@ -15,9 +15,9 @@ export class OccurenceComponent implements OnInit {
   ) {}
   ngOnInit(): void {}
 
-  handleDialogSubmit() {
-    this.dialogRef.close();
-  }
+  // handleDialogSubmit() {
+  //   this.dialogRef.close();
+  // }
   closeDialog(): void {
     this.dialogRef.close();
   }
