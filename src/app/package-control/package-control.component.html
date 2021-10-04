@@ -6,6 +6,7 @@
                     <label class="cardHeader">Basic Details</label>
                 </div>
                 <div class="card-body">
+                    <!-- package title -->
                     <div class="input-group">
                         <div class="input-group-append">
                             <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
@@ -14,6 +15,7 @@
                         <input type="text" class="form-control" id="inputFirstName" placeholder="Package Title"
                             name="firstName" ngModel #firstNameInput="ngModel" pattern="^[A-Za-z]{3,30}$" required>
                     </div>
+                    <!-- description -->
                     <div class="input-group mt-3">
                         <div class="input-group-append">
                             <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
@@ -21,18 +23,29 @@
                         </div>
                         <textarea class="form-control" placeholder="Description" rows="3"></textarea>
                     </div>
+                    <!-- grade -->
                     <div class="input-group mt-3">
                         <div class="input-group-append">
-                            <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
-                                title="Enter the Date the course will End"><i class="fas fa-hourglass-end"></i></span>
+                            <span class="input-group-text inputSelectIcon" data-toggle="tooltip" data-placement="top"
+                                title="Enter unique username"><i class="fab fa-odnoklassniki-square fa-lg"></i></span>
                         </div>
-                        <input class="form-control" placeholder="Course End Date" name="dp" [(ngModel)]="model"
-                            ngbDatepicker #d1="ngbDatepicker">
+                        <ng-select class="form-control" [items]="gradeVar" groupBy="value" bindLabel="name"
+                            bindValue="value" placeholder="Select grade" [multiple]="true">
+                            <ng-template ng-optgroup-tmp let-item="item">{{item.name || 'Untitled'}}</ng-template>
+                            <ng-template ng-option-tmp let-item="item">{{item}}</ng-template>
+                        </ng-select>
+                    </div>
+                    <!-- subject -->
+                    <div class="input-group mt-3">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" (click)="d1.toggle()" type="button">
-                                <i class="fas fa-calendar"></i>
-                            </button>
+                            <span class="input-group-text inputSelectIcon" data-toggle="tooltip" data-placement="top"
+                                title="Enter unique username"><i class="fab fa-odnoklassniki-square fa-lg"></i></span>
                         </div>
+                        <ng-select class="form-control" [items]="gradeVar" groupBy="value" bindLabel="name"
+                            bindValue="value" placeholder="Select subject" [multiple]="true">
+                            <ng-template ng-optgroup-tmp let-item="item">{{item.name || 'Untitled'}}</ng-template>
+                            <ng-template ng-option-tmp let-item="item">{{item}}</ng-template>
+                        </ng-select>
                     </div>
                 </div>
             </div>
@@ -40,9 +53,10 @@
         <div class="col-12 col-md-6 col-lg-4 mb-3">
             <div class="card">
                 <div class="card-header bg-info">
-                    <label class="cardHeader">Time</label>
+                    <label class="cardHeader">Package Control</label>
                 </div>
                 <div class="card-body">
+                    <!-- weekly hours -->
                     <div class="input-group">
                         <div class="input-group-append">
                             <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
@@ -57,6 +71,7 @@
                             <span class="loginOr">or</span>
                         </div>
                     </div>
+                    <!-- monthly hours -->
                     <div class="input-group mt-2">
                         <div class="input-group-append">
                             <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
@@ -64,6 +79,30 @@
                         </div>
                         <input type="number" class="form-control" id="inputFirstName" placeholder="Monthly Hours"
                             name="firstName" ngModel #firstNameInput="ngModel" pattern="^[0-9\-]$" required>
+                    </div>
+                    <!-- course end date -->
+                    <div class="input-group mt-3">
+                        <div class="input-group-append">
+                            <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
+                                title="Enter the Date the course will End"><i class="fas fa-hourglass-end"></i></span>
+                        </div>
+                        <input class="form-control" placeholder="Course End Date" name="dp" [(ngModel)]="model"
+                            ngbDatepicker #d1="ngbDatepicker">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" (click)="d1.toggle()" type="button">
+                                <i class="fas fa-calendar"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- visible -->
+                    <div class="form-check form-switch mt-3">
+                        <input class="form-check-input" checked type="checkbox" id="packageVisible" disabled>
+                        <label class="form-check-label formCheckBoxLabel" for="packageVisible">Visible</label>
+                    </div>
+                    <!-- active -->
+                    <div class="form-check form-switch mt-3">
+                        <input class="form-check-input" checked type="checkbox" id="packageActive" disabled>
+                        <label class="form-check-label formCheckBoxLabel" for="packageActive">Active</label>
                     </div>
                 </div>
             </div>
@@ -110,6 +149,11 @@
                         <input type="number" class="form-control" id="inputFirstName" placeholder="Cost / Month"
                             name="firstName" ngModel #firstNameInput="ngModel" pattern="^[0-9\-]$" required>
                     </div>
+                    <!-- refundable -->
+                    <div class="form-check form-switch mt-3">
+                        <input class="form-check-input" checked type="checkbox" id="packageVisible">
+                        <label class="form-check-label formCheckBoxLabel" for="packageVisible">Fees Refundable</label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -123,6 +167,7 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    <!-- course duration -->
                     <div class="input-group">
                         <div class="input-group-append">
                             <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
@@ -131,6 +176,16 @@
                         <input type="number" class="form-control" id="inputFirstName" placeholder="Duration in Weeks"
                             [disabled]="!courseEnabler" name="firstName" ngModel #firstNameInput="ngModel"
                             pattern="^[0-9]$">
+                    </div>
+                    <!-- course discount -->
+                    <div class="input-group mt-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
+                                title="Enter unique username"><i class="fas fa-percent"></i></span>
+                        </div>
+                        <input type="number" class="form-control" id="inputFirstName" placeholder="Course Discount"
+                            [disabled]="!courseEnabler" name="firstName" ngModel #firstNameInput="ngModel"
+                            pattern="^[0-9]$" required>
                     </div>
                     <div class="form-check form-switch mt-3">
                         <input class="form-check-input" checked type="checkbox" id="courseMiddle"
@@ -181,9 +236,9 @@
                                                     class="fas fa-chalkboard"></i></span>
                                         </div>
                                         <input type="text" class="form-control" placeholder="Batch Name"
-                                            [ngModel]="map.key" (change)="onMapKeyChange($event.target.value,map.key)" pattern="^[A-Za-z0-9_ ]$" required>
-                                        <button class="btn btn-success" style="margin-left:1em;"
-                                            (click)="openModal()">
+                                            [ngModel]="map.key" (change)="onMapKeyChange($event.target.value,map.key)"
+                                            pattern="^[A-Za-z0-9_ ]$" required>
+                                        <button class="btn btn-success" style="margin-left:1em;" (click)="openModal()">
                                             <i class="fas fa-plus"></i>&nbsp;Add
                                         </button>
                                     </div>
@@ -237,7 +292,7 @@
             </div>
 
         </div>
-        <div class="col-12 col-md-1 mb-3">
+        <div class="col-12 col-md-1 mb-3" style="text-align: center">
             <button class="btn btn-primary btn-lg">Submit</button>
         </div>
     </div>

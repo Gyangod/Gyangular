@@ -4,6 +4,7 @@ import { MatTableModule } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { PackageControlRoutingModule } from './package-control-routing.module';
 import { PackageControlComponent } from './package-control.component';
@@ -23,6 +24,7 @@ import { DeleteOccurenceComponent } from '../modal/delete-occurence/delete-occur
     MatTableModule,
     FormsModule,
     NgbModule,
+    NgSelectModule,
     MatDialogModule
   ]
 })

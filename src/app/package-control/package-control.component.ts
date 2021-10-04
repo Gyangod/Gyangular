@@ -32,6 +32,12 @@ export class PackageControlComponent implements OnInit {
       { fromTime: "05:00 AM", toTime: "07:15 AM", timeDifferent: 2.33, isActive: true, repeatable: true, day: "THR" },
     ]],
   ]);
+  gradeVar = [{ name: "Primary", value: ["Class 1","Class 2","Class 3","Class 4","Class 5"]  },
+             {name: "Secondary", value: ["Class 6","Class 7","Class 8","Class 9","Class 10"] },
+             {name: "Higher Secondary", value: ["Class 11","Class 12","Joint Entrance"] },
+             {name: "Grads", value: ["GATE","IES","PSU"] },
+  ];
+  
   model: NgbDateStruct;
 
   displayedColumns: string[] = ['actions', 'from', 'to', 'day'];

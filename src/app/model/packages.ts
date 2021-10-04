@@ -11,9 +11,10 @@ export interface Packages {
     createdBy: User;
     teacher: User;
     teacherName: string;
-    addOtherMembers: boolean;
+    anyoneCanAddBatch: boolean;
+    refundable: boolean;
     costPerHour: number;
-    monthlyDiscount: number;
+    courseDiscount: number;
     weeklyCost: number;
     totalWeekHours: number;
     totalMonthHours: number;
@@ -23,7 +24,6 @@ export interface Packages {
     location: LocationPoint;
     mapOccurrences: Map<string,PackageOccurence[]>;
     subjects: string[];
-    topics: string[];
     visibility: boolean;
     isActive: boolean;
 

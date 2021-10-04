@@ -33,6 +33,10 @@
     padding: .65rem .75rem;
 }
 
+.inputSelectIcon{
+    padding: .84rem .75rem;
+}
+
 .loginOr {
     /* font-size: 1.5em; */
     color: #aaa;
