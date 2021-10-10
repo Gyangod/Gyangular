@@ -1,0 +1,12 @@
+<div>
+    <h1 mat-dialog-title class="headerTitle">{{ confirmData.dialogHeader }}</h1>
+    <div mat-dialog-content>
+        <h3>{{ confirmData.dialogBody }}</h3>
+    </div>
+    <div mat-dialog-actions class="dialogActionDiv">
+        <button type="submit" class="btn" (click)="handleSubmit()" [ngClass]="confirmData.danger ? 'btn-danger' : 'btn-primary'">
+            {{ confirmData.confirmButtonLabel }}
+        </button>
+        <button type="button" (click)="closeDialog()" class="btn btn-secondary cancelBtn">Cancel</button>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+.headerTitle {
+    display: block;
+    text-align: center;
+}
+
+.dialogActionDiv {
+    display: block;
+    text-align: center;
+}
+
+.cancelBtn {
+    margin-left: 1em;
+}

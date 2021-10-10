@@ -7,6 +7,10 @@ import { NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-boots
 import { CustomAdapter, CustomDateParserFormatter } from '../global/global.datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { ConfirmConfig } from '../modal/confirm/confirm.config';
+import { ConfirmComponent } from '../modal/confirm/confirm.component';
+import { NotificationService } from '../service/notification.service';
+import { NotificationType } from '../enum/notification-type.enum';
 
 
 @Component({
@@ -19,6 +23,7 @@ import { MatTable } from '@angular/material/table';
   ]
 })
 export class PackageControlComponent implements OnInit {
+  NEW_BATCH_NAME: string = "new Batch";
 
   ELEMENT_DATA: Map<string, PackageOccurence[]> = new Map([
     ["Batch1", [
@@ -45,12 +50,11 @@ export class PackageControlComponent implements OnInit {
   displayedColumns: string[] = ['actions', 'from', 'to', 'day'];
   mapData = this.ELEMENT_DATA;
   courseEnabler: boolean = false;
-  scheduleEnabler: boolean = true;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, public dialog: MatDialog) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, public dialog: MatDialog, private notificationService: NotificationService) {
   }
 
-  addOccuerence(key: string,index: number): void {
+  addOccuerence(key: string, index: number): void {
     let dialogInterface: OccurenceConfig = {
       dialogHeader: 'Add an Occuerence',
       confirmButtonLabel: 'Submit',
@@ -59,11 +63,12 @@ export class PackageControlComponent implements OnInit {
     this.dialog.open(OccurenceComponent, {
       width: '30em',
       data: dialogInterface,
-      disableClose: true ,
+      disableClose: true,
     }).afterClosed().subscribe(result => {
       if (result !== undefined) {
         this.ELEMENT_DATA.get(key).push(result);
         this.tables.forEach(ele => ele.renderRows());
+        this.sendNotification(NotificationType.SUCCESS, "Occurence Added Successfully in " + key);
       }
     });
   }
@@ -77,34 +82,68 @@ export class PackageControlComponent implements OnInit {
     }
   }
 
-  addPackOccurence() {
-    this.ELEMENT_DATA.set("please change", []);
+  addPackOccurence(): void {
+    if (this.ELEMENT_DATA.has(this.NEW_BATCH_NAME)) {
+      this.sendNotification(NotificationType.ERROR, "Please Change existing Batch name \"" + this.NEW_BATCH_NAME + "\" to add new");
+      return;
+    }
+    this.ELEMENT_DATA.set(this.NEW_BATCH_NAME, []);
+    this.sendNotification(NotificationType.SUCCESS, "New Batch added with name " + this.NEW_BATCH_NAME);
   }
 
   editOccurence(key: string, value: number): void {
     let dialogInterface: OccurenceConfig = {
-      dialogHeader: 'Edit an Occuerence',
+      dialogHeader: 'Edit the Occuerence',
       confirmButtonLabel: 'Update',
       occuerence: this.ELEMENT_DATA.get(key)[value]
     };
     this.dialog.open(OccurenceComponent, {
       width: '30em',
       data: dialogInterface,
-      disableClose: true ,
+      disableClose: true,
     }).afterClosed().subscribe(result => {
       if (result !== undefined) {
         this.ELEMENT_DATA.get(key)[value] = result;
         this.tables.forEach(ele => ele.renderRows());
+        this.sendNotification(NotificationType.DEFAULT, "Occurence Updated");
       }
     });
   }
 
   deleteOccurence(key: string, value: number): void {
-    console.log("Delete map at index: " + key + " value: " + value);
+    let confirmInterface: ConfirmConfig = {
+      dialogHeader: 'Delete Occuerence',
+      confirmButtonLabel: 'Delete',
+      dialogBody: 'Are you sure you want to delete?',
+      danger: true
+    };
+    this.dialog.open(ConfirmComponent, {
+      width: '30em',
+      data: confirmInterface,
+    }).afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.ELEMENT_DATA.get(key).splice(value, 1);
+        this.tables.forEach(ele => ele.renderRows());
+        this.sendNotification(NotificationType.INFO, "Occuerence Deleted");
+      }
+    });
   }
-
-  addOccurence(key: string): void {
-    console.log("key: " + key);
+  deleteBatch(key: string): void {
+    let confirmInterface: ConfirmConfig = {
+      dialogHeader: 'Delete Batch ' + key,
+      confirmButtonLabel: 'Delete',
+      dialogBody: 'Are you sure you want to delete?',
+      danger: true
+    };
+    this.dialog.open(ConfirmComponent, {
+      width: '30em',
+      data: confirmInterface,
+    }).afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.ELEMENT_DATA.delete(key);
+        this.sendNotification(NotificationType.WARNING, key + " Batch Deleted");
+      }
+    });
   }
 
   onMapKeyChange(value: string, index: string): void {
@@ -112,6 +151,13 @@ export class PackageControlComponent implements OnInit {
     //deleteing the previous key on the map
     this.ELEMENT_DATA.delete(index);
     this.ELEMENT_DATA.set(value, pack);
-    console.log(this.ELEMENT_DATA.keys());
+  }
+
+  private sendNotification(notificationType: NotificationType, message: string): void {
+    if (message) {
+      this.notificationService.notify(notificationType, message);
+    } else {
+      this.notificationService.notify(notificationType, 'An error occurred. Please try again.');
+    }
   }
 }

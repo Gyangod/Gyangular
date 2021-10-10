@@ -8,14 +8,14 @@ import { TimePickerModule } from '../common/timepicker/timepicker.module';
 import { PackageControlRoutingModule } from './package-control-routing.module';
 import { PackageControlComponent } from './package-control.component';
 import { OccurenceComponent } from '../modal/occurence/occurence.component';
-import { DeleteOccurenceComponent } from '../modal/delete-occurence/delete-occurence.component';
+import { ConfirmComponent } from '../modal/confirm/confirm.component';
 
 
 @NgModule({
   declarations: [
     PackageControlComponent,
     OccurenceComponent,
-    DeleteOccurenceComponent
+    ConfirmComponent,
   ],
   imports: [
     TimePickerModule,
