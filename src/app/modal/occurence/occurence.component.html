@@ -1,14 +1,57 @@
 <div>
-  <h1 mat-dialog-title>{{ dialogData.dialogHeader }}</h1>
-  <div mat-dialog-content>
-    <p>{{ dialogData.dialogContent }}</p>
-  </div>
-  <div mat-dialog-actions>
-    <button [mat-dialog-close]="'hello'">
-      {{ dialogData.confirmButtonLabel }}
-    </button>
-    <button (click)="closeDialog()" color="accent">
-      {{ dialogData.cancelButtonLabel }}
-    </button>
-  </div>
+  <h1 mat-dialog-title class="headerTitle">{{ dialogData.dialogHeader }}</h1>
+  <form #occurenceForm ngNativeValidate (ngSubmit)="handleSubmit()">
+    <div mat-dialog-content>
+      <!-- From Time -->
+      <div class="input-group">
+        <div class="input-group-append">
+          <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
+            title="Enter unique username"><i class="far fa-clock"></i></span>
+        </div>
+        <input class="form-control" [ngxTimepicker]="fromTime" placeholder="From Time" [value]="packOccurence.fromTime"
+         required>
+        <ngx-material-timepicker (timeSet)="packOccurence.fromTime=$event" #fromTime></ngx-material-timepicker>
+      </div>
+      <!-- To Time -->
+      <div class="input-group mt-3">
+        <div class="input-group-append">
+          <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
+            title="Enter unique username"><i class="far fa-clock"></i></span>
+        </div>
+        <input class="form-control" [ngxTimepicker]="toTime" placeholder="To Time" [value]="packOccurence.toTime"
+          required>
+        <ngx-material-timepicker (timeSet)="packOccurence.toTime=$event" #toTime></ngx-material-timepicker>
+      </div>
+      <!-- Day -->
+      <div class="input-group mt-3">
+        <div class="input-group-append">
+          <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
+            title="Enter unique username"><i class="fas fa-calendar-day"></i></span>
+        </div>
+        <select class="form-select" [(ngModel)]="packOccurence.day" required>
+          <option value="" hidden selected>Select Day</option>
+          <option *ngFor="let day of days | keyvalue: asIsOrder" [value]="day.key">{{day.value}}</option>
+        </select>
+      </div>
+      <!-- Enabled for Calculation -->
+      <div class="form-check form-switch mt-3">
+        <input class="form-check-input" type="checkbox" id="enabled" [(ngModel)]="packOccurence.isActive"
+          [ngModelOptions]="{standalone: true}">
+        <label class="form-check-label formCheckBoxLabel" for="enabled">Enabled</label>
+      </div>
+      <!-- Repeatable for the Week -->
+      <div class="form-check form-switch mt-3">
+        <input class="form-check-input" type="checkbox" id="repeatable" [(ngModel)]="packOccurence.repeatable"
+          [ngModelOptions]="{standalone: true}">
+        <label class="form-check-label" for="repeatable">Repeatable</label>
+      </div>
+    </div>
+    <div mat-dialog-actions class="dialogActionDiv">
+      <!-- <button [mat-dialog-close]="'hello'" class="btn btn-primary"> -->
+      <button type="submit" class="btn btn-primary">
+        {{ dialogData.confirmButtonLabel }}
+      </button>
+      <button type="button" (click)="closeDialog()" class="btn btn-secondary cancelBtn">Cancel</button>
+    </div>
+  </form>
 </div>

@@ -39,7 +39,7 @@
                     <div class="input-group mt-3">
                         <div class="input-group-append">
                             <span class="input-group-text inputSelectIcon" data-toggle="tooltip" data-placement="top"
-                                title="Enter unique username"><i class="fab fa-odnoklassniki-square fa-lg"></i></span>
+                                title="Enter unique username"><i class="fas fa-pencil-ruler"></i></span>
                         </div>
                         <ng-select class="form-control" [items]="gradeVar" groupBy="value" bindLabel="name"
                             bindValue="value" placeholder="Select subject" [multiple]="true">
@@ -238,7 +238,7 @@
                                         <input type="text" class="form-control" placeholder="Batch Name"
                                             [ngModel]="map.key" (change)="onMapKeyChange($event.target.value,map.key)"
                                             pattern="^[A-Za-z0-9_ ]$" required>
-                                        <button class="btn btn-success" style="margin-left:1em;" (click)="openModal()">
+                                        <button class="btn btn-success" style="margin-left:1em;" (click)="addOccuerence(map.key,i)">
                                             <i class="fas fa-plus"></i>&nbsp;Add
                                         </button>
                                     </div>
