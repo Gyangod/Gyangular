@@ -1,298 +1,334 @@
 <div class="container-fluid">
-    <div class="row my-3">
-        <div class="col-12 col-md-6 col-lg-4 mb-3">
-            <div class="card">
-                <div class="card-header bg-info">
-                    <label class="cardHeader">Basic Details</label>
-                </div>
-                <div class="card-body">
-                    <!-- package title -->
-                    <div class="input-group">
-                        <div class="input-group-append">
-                            <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
-                                title="Enter unique username"><i class="fas fa-heading"></i></span>
-                        </div>
-                        <input type="text" class="form-control" id="inputFirstName" placeholder="Package Title"
-                            name="firstName" ngModel #firstNameInput="ngModel" pattern="^[A-Za-z]{3,30}$" required>
+    <form #packageControl ngNativeValidate (ngSubmit)="submitPackage()">
+        <div class="row my-3">
+            <div class="col-12 col-md-6 col-lg-4 mb-3">
+                <div class="card">
+                    <div class="card-header bg-info">
+                        <label class="cardHeader">Basic Details</label>
                     </div>
-                    <!-- description -->
-                    <div class="input-group mt-3">
-                        <div class="input-group-append">
-                            <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
-                                title="Enter unique username"><i class="fas fa-scroll"></i></span>
+                    <div class="card-body">
+                        <!-- package title -->
+                        <div class="input-group">
+                            <div class="input-group-append">
+                                <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
+                                    title="Enter Package name"><i class="fas fa-heading"></i></span>
+                            </div>
+                            <input type="text" class="form-control" name="name" placeholder="Package Title"
+                                [(ngModel)]="package.name" pattern="^[A-Za-z0-9 ]{5,}$" required #name="ngModel">
                         </div>
-                        <textarea class="form-control" placeholder="Description" rows="3"></textarea>
-                    </div>
-                    <!-- grade -->
-                    <div class="input-group mt-3">
-                        <div class="input-group-append">
-                            <span class="input-group-text inputSelectIcon" data-toggle="tooltip" data-placement="top"
-                                title="Enter unique username"><i class="fab fa-odnoklassniki-square fa-lg"></i></span>
+                        <span class="help-block" style="color:red;" *ngIf="name.invalid && name.touched">Name must be
+                            Alphanumeric and space
+                            with minimum of 5 characters</span>
+                        <!-- description -->
+                        <div class="input-group mt-3">
+                            <div class="input-group-append">
+                                <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
+                                    title="Enter Description of the Package"><i class="fas fa-scroll"></i></span>
+                            </div>
+                            <textarea class="form-control" name="description" placeholder="Description"
+                                [(ngModel)]="package.description" rows="3"></textarea>
                         </div>
-                        <ng-select class="form-control" [items]="gradeVar" groupBy="value" bindLabel="name"
-                            bindValue="value" placeholder="Select grade" [multiple]="true">
-                            <ng-template ng-optgroup-tmp let-item="item">{{item.name || 'Untitled'}}</ng-template>
-                            <ng-template ng-option-tmp let-item="item">{{item}}</ng-template>
-                        </ng-select>
-                    </div>
-                    <!-- subject -->
-                    <div class="input-group mt-3">
-                        <div class="input-group-append">
-                            <span class="input-group-text inputSelectIcon" data-toggle="tooltip" data-placement="top"
-                                title="Enter unique username"><i class="fas fa-pencil-ruler"></i></span>
+                        <!-- grade -->
+                        <div class="input-group mt-3">
+                            <div class="input-group-append">
+                                <span class="input-group-text inputSelectIcon" data-toggle="tooltip"
+                                    data-placement="top" title="Select the Standards you want to teach"><i
+                                        class="fab fa-odnoklassniki-square fa-lg"></i></span>
+                            </div>
+                            <ng-select class="form-control" [items]="gradeVar" groupBy="value" bindLabel="name"
+                                bindValue="value" placeholder="Select grade" [multiple]="true" name="standards"
+                                [(ngModel)]="package.standards" #standards="ngModel" required>
+                                <ng-template ng-optgroup-tmp let-item="item">{{item.name || 'Untitled'}}</ng-template>
+                                <ng-template ng-option-tmp let-item="item">{{item}}</ng-template>
+                            </ng-select>
                         </div>
-                        <ng-select class="form-control" [items]="gradeVar" groupBy="value" bindLabel="name"
-                            bindValue="value" placeholder="Select subject" [multiple]="true">
-                            <ng-template ng-optgroup-tmp let-item="item">{{item.name || 'Untitled'}}</ng-template>
-                            <ng-template ng-option-tmp let-item="item">{{item}}</ng-template>
-                        </ng-select>
+                        <span class="help-block" style="color:red;"
+                            *ngIf="standards.invalid && standards.touched">Please select atleast a standard</span>
+                        <!-- subject -->
+                        <div class="input-group mt-3">
+                            <div class="input-group-append">
+                                <span class="input-group-text inputSelectIcon" data-toggle="tooltip"
+                                    data-placement="top" title="Select the Subjects you want to teach"><i
+                                        class="fas fa-pencil-ruler"></i></span>
+                            </div>
+                            <ng-select class="form-control" [items]="gradeVar" groupBy="value" bindLabel="name"
+                                bindValue="value" placeholder="Select subject" [multiple]="true" name="subjects"
+                                [(ngModel)]="package.subjects" #subjects="ngModel" required>
+                                <ng-template ng-optgroup-tmp let-item="item">{{item.name || 'Untitled'}}</ng-template>
+                                <ng-template ng-option-tmp let-item="item">{{item}}</ng-template>
+                            </ng-select>
+                        </div>
+                        <span class="help-block" style="color:red;" *ngIf="subjects.invalid && subjects.touched">Please
+                            select one subject atleast</span>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4 mb-3">
-            <div class="card">
-                <div class="card-header bg-info">
-                    <label class="cardHeader">Package Control</label>
+            <div class="col-12 col-md-6 col-lg-4 mb-3">
+                <div class="card">
+                    <div class="card-header bg-info">
+                        <label class="cardHeader">Package Control</label>
+                    </div>
+                    <div class="card-body">
+                        <!-- weekly hours -->
+                        <div class="input-group">
+                            <div class="input-group-append">
+                                <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
+                                    title="Provide Weekly Hours of Teaching"><i class="fas fa-clock"></i></span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="Weekly Hours" name="totalWeekHours"
+                                [(ngModel)]="package.totalWeekHours" #totalWeekHours="ngModel" pattern="^[0-9\.]$">
+                        </div>
+                        <div class="row">
+                            <div class="col-12" style="text-align: center">
+                                <hr class="hrLineOr">
+                                <span class="loginOr">or</span>
+                            </div>
+                        </div>
+                        <!-- monthly hours -->
+                        <div class="input-group mt-2">
+                            <div class="input-group-append">
+                                <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
+                                    title="Provide Monthly Hours of Teaching"><i class="fas fa-clock"></i></span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="Monthly Hours" name="totalMonthHours"
+                                [(ngModel)]="package.totalMonthHours" #totalMonthHours="ngModel" pattern="^[0-9\-]$">
+                        </div>
+                        <!-- course end date -->
+                        <div class="input-group mt-3">
+                            <div class="input-group-append">
+                                <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
+                                    title="Enter the Date the course will End"><i
+                                        class="fas fa-hourglass-end"></i></span>
+                            </div>
+                            <input type="date" max="2099-12-31" format="dd/MM/yyyy" class="form-control"
+                                placeholder="Course End Date" name="courseEndDate" [(ngModel)]="package.courseEndDate"
+                                #courseEndDate="ngModel" required>
+                            <!-- ngbDatepicker #d1="ngbDatepicker" -->
+                            <!-- <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" (click)="d1.toggle()" type="button">
+                                    <i class="fas fa-calendar"></i>
+                                </button>
+                            </div> -->
+                        </div>
+                        <span class="help-block" style="color:red;"
+                            *ngIf="courseEndDate.invalid && courseEndDate.touched">Enter the course end date</span>
+                        <!-- visible -->
+                        <div class="form-check form-switch mt-3">
+                            <input class="form-check-input" type="checkbox" id="packageVisible" name="visibility"
+                                [(ngModel)]="package.visibility" #visibility="ngModel"
+                                [ngModelOptions]="{standalone: true}">
+                            <label class="form-check-label formCheckBoxLabel" for="packageVisible">Visible</label>
+                        </div>
+                        <!-- active -->
+                        <div class="form-check form-switch mt-3">
+                            <input class="form-check-input" disabled type="checkbox" id="packageActive"
+                                [(ngModel)]="package.isActive" #isActive="ngModel" name="isActive"
+                                [ngModelOptions]="{standalone: true}">
+                            <label class="form-check-label formCheckBoxLabel" for="packageActive">Active</label>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <!-- weekly hours -->
-                    <div class="input-group">
-                        <div class="input-group-append">
-                            <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
-                                title="Enter unique username"><i class="fas fa-clock"></i></span>
-                        </div>
-                        <input type="number" class="form-control" id="inputFirstName" placeholder="Weekly Hours"
-                            name="firstName" ngModel #firstNameInput="ngModel" pattern="^[0-9\.]$" required>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 mb-3">
+                <div class="card">
+                    <div class="card-header bg-info">
+                        <label class="cardHeader">Cost</label>
                     </div>
-                    <div class="row">
-                        <div class="col-12" style="text-align: center">
-                            <hr class="hrLineOr">
-                            <span class="loginOr">or</span>
+                    <div class="card-body">
+                        <!-- cost/hour -->
+                        <div class="input-group">
+                            <div class="input-group-append">
+                                <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
+                                    title="Provide Amount per hour"><i class="fas fa-rupee-sign"></i></span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="Cost / Hour" name="costPerHour"
+                                [(ngModel)]="package.costPerHour" #costPerHour="ngModel" pattern="^[0-9\.]$">
+                        </div>
+                        <div class="row">
+                            <div class="col-12" style="text-align: center">
+                                <hr class="hrLineOr">
+                                <span class="loginOr">or</span>
+                            </div>
+                        </div>
+                        <!-- cost/week -->
+                        <div class="input-group mt-2">
+                            <div class="input-group-append">
+                                <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
+                                    title="Provide Amount per week"><i class="fas fa-rupee-sign"></i></span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="Cost / Week" name="weeklyCost"
+                                [(ngModel)]="package.weeklyCost" #weeklyCost="ngModel" pattern="^[0-9\.]$">
+                        </div>
+                        <div class="row">
+                            <div class="col-12" style="text-align: center">
+                                <hr class="hrLineOr">
+                                <span class="loginOr">or</span>
+                            </div>
+                        </div>
+                        <!-- cost/month -->
+                        <div class="input-group mt-2">
+                            <div class="input-group-append">
+                                <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
+                                    title="Provide Amount per month"><i class="fas fa-rupee-sign"></i></span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="Cost / Month" name="monthlyCost"
+                                [(ngModel)]="package.monthlyCost" #monthlyCost="ngModel" pattern="^[0-9\.]$">
+                        </div>
+                        <!-- refundable -->
+                        <div class="form-check form-switch mt-3">
+                            <input class="form-check-input" type="checkbox" id="refundable" name="refundable"
+                                [(ngModel)]="package.refundable" #refundable="ngModel"
+                                [ngModelOptions]="{standalone: true}">
+                            <label class="form-check-label formCheckBoxLabel" for="refundable">Fees
+                                Refundable</label>
                         </div>
                     </div>
-                    <!-- monthly hours -->
-                    <div class="input-group mt-2">
-                        <div class="input-group-append">
-                            <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
-                                title="Enter unique username"><i class="fas fa-clock"></i></span>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 mb-3">
+                <div class="card">
+                    <div class="card-header bg-info">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input customSwitch" type="checkbox" id="courseSwitch"
+                                name="courseEnabler" [(ngModel)]="courseEnabler" [ngModelOptions]="{standalone: true}">
+                            <label class="form-check-label cardHeader" for="courseSwitch">Course</label>
                         </div>
-                        <input type="number" class="form-control" id="inputFirstName" placeholder="Monthly Hours"
-                            name="firstName" ngModel #firstNameInput="ngModel" pattern="^[0-9\-]$" required>
                     </div>
-                    <!-- course end date -->
-                    <div class="input-group mt-3">
-                        <div class="input-group-append">
-                            <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
-                                title="Enter the Date the course will End"><i class="fas fa-hourglass-end"></i></span>
+                    <div class="card-body">
+                        <!-- course duration -->
+                        <div class="input-group">
+                            <div class="input-group-append">
+                                <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
+                                    title="Enter Duration of the course"><i class="fas fa-business-time"></i></span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="Duration in Weeks"
+                                [disabled]="!courseEnabler" name="courseDuration" [(ngModel)]="package.courseDuration"
+                                #courseDuration="ngModel" pattern="^[0-9]$">
                         </div>
-                        <input class="form-control" placeholder="Course End Date" name="dp" [(ngModel)]="model"
-                            ngbDatepicker #d1="ngbDatepicker">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" (click)="d1.toggle()" type="button">
-                                <i class="fas fa-calendar"></i>
+                        <!-- course discount -->
+                        <div class="input-group mt-2">
+                            <div class="input-group-append">
+                                <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
+                                    title="Enter Discount of the course"><i class="fas fa-percent"></i></span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="Course Discount"
+                                [disabled]="!courseEnabler" name="courseDiscount" [(ngModel)]="package.courseDiscount"
+                                #courseDiscount="ngModel" pattern="^[0-9]$">
+                        </div>
+                        <!-- fixed course (inverted) -->
+                        <div class="form-check form-switch mt-3">
+                            <input class="form-check-input" type="checkbox" id="courseMiddle" name="fixedCourse"
+                                [(ngModel)]="!package.fixedCourse" #fixedCourse="ngModel"
+                                [ngModelOptions]="{standalone: true}" [disabled]="!courseEnabler">
+                            <label class="form-check-label formCheckBoxLabel" for="courseMiddle">Can Join in middle of
+                                the Course</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-9 col-lg-7 mb-3">
+                <div class="card">
+                    <div class="card-header bg-info">
+                        <label class="cardHeader">Schedule</label>
+                    </div>
+                    <div class="card-body">
+                        <div class=mx-3>
+                            <div class="form-check form-switch allScheduleSwitch my-3">
+                                <input class="form-check-input" type="checkbox" id="allSchedule"
+                                    name="anyoneCanAddBatch" [(ngModel)]="package.anyoneCanAddBatch"
+                                    #anyoneCanAddBatch="ngModel" [ngModelOptions]="{standalone: true}">
+                                <label class="form-check-label formCheckBoxLabel" for="allSchedule">Anyone can add
+                                    Batch</label>
+                            </div>
+                            <button class="btn btn-success my-3" type="button" (click)="addPackOccurence()">
+                                <i class="fas fa-plus-square"></i>&nbsp;Add Batch
                             </button>
                         </div>
-                    </div>
-                    <!-- visible -->
-                    <div class="form-check form-switch mt-3">
-                        <input class="form-check-input" checked type="checkbox" id="packageVisible" disabled>
-                        <label class="form-check-label formCheckBoxLabel" for="packageVisible">Visible</label>
-                    </div>
-                    <!-- active -->
-                    <div class="form-check form-switch mt-3">
-                        <input class="form-check-input" checked type="checkbox" id="packageActive" disabled>
-                        <label class="form-check-label formCheckBoxLabel" for="packageActive">Active</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4 mb-3">
-            <div class="card">
-                <div class="card-header bg-info">
-                    <label class="cardHeader">Cost</label>
-                </div>
-                <div class="card-body">
-                    <div class="input-group">
-                        <div class="input-group-append">
-                            <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
-                                title="Enter unique username"><i class="fas fa-rupee-sign"></i></span>
-                        </div>
-                        <input type="number" class="form-control" id="inputFirstName" placeholder="Cost / Hour"
-                            name="firstName" ngModel #firstNameInput="ngModel" pattern="^[0-9\.]$" required>
-                    </div>
-                    <div class="row">
-                        <div class="col-12" style="text-align: center">
-                            <hr class="hrLineOr">
-                            <span class="loginOr">or</span>
-                        </div>
-                    </div>
-                    <div class="input-group mt-2">
-                        <div class="input-group-append">
-                            <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
-                                title="Enter unique username"><i class="fas fa-rupee-sign"></i></span>
-                        </div>
-                        <input type="number" class="form-control" id="inputFirstName" placeholder="Cost / Week"
-                            name="firstName" ngModel #firstNameInput="ngModel" pattern="^[0-9\-]$" required>
-                    </div>
-                    <div class="row">
-                        <div class="col-12" style="text-align: center">
-                            <hr class="hrLineOr">
-                            <span class="loginOr">or</span>
-                        </div>
-                    </div>
-                    <div class="input-group mt-2">
-                        <div class="input-group-append">
-                            <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
-                                title="Enter unique username"><i class="fas fa-rupee-sign"></i></span>
-                        </div>
-                        <input type="number" class="form-control" id="inputFirstName" placeholder="Cost / Month"
-                            name="firstName" ngModel #firstNameInput="ngModel" pattern="^[0-9\-]$" required>
-                    </div>
-                    <!-- refundable -->
-                    <div class="form-check form-switch mt-3">
-                        <input class="form-check-input" checked type="checkbox" id="packageVisible">
-                        <label class="form-check-label formCheckBoxLabel" for="packageVisible">Fees Refundable</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4 mb-3">
-            <div class="card">
-                <div class="card-header bg-info">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input customSwitch" type="checkbox" id="courseSwitch"
-                            [(ngModel)]="courseEnabler">
-                        <label class="form-check-label cardHeader" for="courseSwitch">Course</label>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <!-- course duration -->
-                    <div class="input-group">
-                        <div class="input-group-append">
-                            <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
-                                title="Enter unique username"><i class="fas fa-business-time"></i></span>
-                        </div>
-                        <input type="number" class="form-control" id="inputFirstName" placeholder="Duration in Weeks"
-                            [disabled]="!courseEnabler" name="firstName" ngModel #firstNameInput="ngModel"
-                            pattern="^[0-9]$">
-                    </div>
-                    <!-- course discount -->
-                    <div class="input-group mt-2">
-                        <div class="input-group-append">
-                            <span class="input-group-text inputIcons" data-toggle="tooltip" data-placement="top"
-                                title="Enter unique username"><i class="fas fa-percent"></i></span>
-                        </div>
-                        <input type="number" class="form-control" id="inputFirstName" placeholder="Course Discount"
-                            [disabled]="!courseEnabler" name="firstName" ngModel #firstNameInput="ngModel"
-                            pattern="^[0-9]$" required>
-                    </div>
-                    <div class="form-check form-switch mt-3">
-                        <input class="form-check-input" checked type="checkbox" id="courseMiddle"
-                            [disabled]="!courseEnabler">
-                        <label class="form-check-label formCheckBoxLabel" for="courseMiddle">Can Join in middle of the
-                            Course</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-9 col-lg-7 mb-3">
-            <div class="card">
-                <div class="card-header bg-info">
-                    <label class="cardHeader">Schedule</label>
-                </div>
-                <div class="card-body">
-                    <div class=mx-3>
-                        <div class="form-check form-switch allScheduleSwitch my-3">
-                            <input class="form-check-input" type="checkbox" id="allSchedule">
-                            <label class="form-check-label formCheckBoxLabel" for="allSchedule">Anyone can add
-                                Batch</label>
-                        </div>
-                        <button class="btn btn-success my-3" (click)="addPackOccurence()">
-                            <i class="fas fa-plus-square"></i>&nbsp;Add Batch
-                        </button>
-                    </div>
-                    <div class="accordion">
-                        <div class="accordion-item" *ngFor="let map of mapData | keyvalue; index as i">
-                            <div class="accordion-header" id="{{'heading'+i}}">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    [attr.data-bs-target]="'#collapse'+i" aria-expanded="false"
-                                    [attr.aria-controls]="'collapse'+i">
-                                    {{map.key || 'Batch' +i}}
-                                </button>
-                            </div>
-                            <div id="{{'collapse'+i}}" class="accordion-collapse collapse"
-                                [attr.aria-labelledby]="'heading'+i" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <div class="input-group" style="width:100%;">
-                                        <button class="btn btn-warning batchDelete" (click)="deleteBatch(map.key)">
-                                            <i class="fas fa-minus-square"></i>&nbsp;Delete Batch
-                                        </button>
-                                    </div>
-                                    <div class="input-group mt-3">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text inputIcons" data-toggle="tooltip"
-                                                data-placement="top" title="Enter unique username"><i
-                                                    class="fas fa-chalkboard"></i></span>
+                        <div class="accordion">
+                            <div class="accordion-item"
+                                *ngFor="let map of package.mapOccurrences | keyvalue; index as i">
+                                <div class="accordion-header" id="{{'heading'+i}}">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        [attr.data-bs-target]="'#collapse'+i" aria-expanded="false"
+                                        [attr.aria-controls]="'collapse'+i">
+                                        {{map.key || 'Batch' +i}}
+                                    </button>
+                                </div>
+                                <div id="{{'collapse'+i}}" class="accordion-collapse collapse"
+                                    [attr.aria-labelledby]="'heading'+i" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <div class="input-group" style="width:100%;">
+                                            <button class="btn btn-warning batchDelete" type="button"
+                                                (click)="deleteBatch(map.key)">
+                                                <i class="fas fa-minus-square"></i>&nbsp;Delete Batch
+                                            </button>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="Batch Name"
-                                            [ngModel]="map.key" (change)="onMapKeyChange($event.target.value,map.key)"
-                                            pattern="^[A-Za-z0-9_ ]$" required>
-                                        <button class="btn btn-success" style="margin-left:1em;"
-                                            (click)="addOccuerence(map.key,i)">
-                                            <i class="fas fa-plus"></i>&nbsp;Add
-                                        </button>
-                                    </div>
-                                    <div class="example-container">
-                                        <table mat-table [dataSource]="map.value" class="customTable">
+                                        <div class="input-group mt-3">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text inputIcons" data-toggle="tooltip"
+                                                    data-placement="top" title="Enter unique username"><i
+                                                        class="fas fa-chalkboard"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Batch Name"
+                                                [ngModel]="map.key" [name]="map.key"
+                                                (change)="onMapKeyChange($event.target.value,map.key)"
+                                                pattern="^[A-Za-z0-9_ ]{3,}$" required>
+                                            <button class="btn btn-success" style="margin-left:1em;" type="button"
+                                                (click)="addOccuerence(map.key,i)">
+                                                <i class="fas fa-plus"></i>&nbsp;Add
+                                            </button>
+                                        </div>
+                                        <div class="example-container">
+                                            <table mat-table [dataSource]="map.value" class="customTable">
 
-                                            <!-- Name Column -->
-                                            <ng-container matColumnDef="actions" sticky>
-                                                <th mat-header-cell *matHeaderCellDef> Actions </th>
-                                                <td mat-cell *matCellDef="let element; let j = index">
-                                                    <button class="btn btn-secondary actionButtons"
-                                                        (click)="editOccurence(map.key,j)">
-                                                        <i class="fas fa-pen"></i>
-                                                    </button>
-                                                    <button class="btn btn-danger actionButtons"
-                                                        (click)="deleteOccurence(map.key,j)">
-                                                        <i class="fas fa-trash-alt"></i>
-                                                    </button>
-                                                </td>
-                                            </ng-container>
+                                                <!-- Action Column -->
+                                                <ng-container matColumnDef="actions" sticky>
+                                                    <th mat-header-cell *matHeaderCellDef> Actions </th>
+                                                    <td mat-cell *matCellDef="let element; let j = index">
+                                                        <button class="btn btn-secondary actionButtons"
+                                                            (click)="editOccurence(map.key,j)">
+                                                            <i class="fas fa-pen"></i>
+                                                        </button>
+                                                        <button class="btn btn-danger actionButtons"
+                                                            (click)="deleteOccurence(map.key,j)">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </td>
+                                                </ng-container>
 
-                                            <!-- Position Column -->
-                                            <ng-container matColumnDef="from">
-                                                <th mat-header-cell *matHeaderCellDef> From </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.fromTime}} </td>
-                                            </ng-container>
+                                                <!-- From Column -->
+                                                <ng-container matColumnDef="from">
+                                                    <th mat-header-cell *matHeaderCellDef> From </th>
+                                                    <td mat-cell *matCellDef="let element"> {{element.fromTime}} </td>
+                                                </ng-container>
 
-                                            <!-- Weight Column -->
-                                            <ng-container matColumnDef="to">
-                                                <th mat-header-cell *matHeaderCellDef> To </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.toTime}} </td>
-                                            </ng-container>
+                                                <!-- To Column -->
+                                                <ng-container matColumnDef="to">
+                                                    <th mat-header-cell *matHeaderCellDef> To </th>
+                                                    <td mat-cell *matCellDef="let element"> {{element.toTime}} </td>
+                                                </ng-container>
 
-                                            <!-- Symbol Column -->
-                                            <ng-container matColumnDef="day">
-                                                <th mat-header-cell *matHeaderCellDef> Day </th>
-                                                <td mat-cell *matCellDef="let element"> {{element.day}} </td>
-                                            </ng-container>
+                                                <!-- Day Column -->
+                                                <ng-container matColumnDef="day">
+                                                    <th mat-header-cell *matHeaderCellDef> Day </th>
+                                                    <td mat-cell *matCellDef="let element"> {{element.day}} </td>
+                                                </ng-container>
 
-                                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                                        </table>
+                                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
+            <div class="col-12 col-md-1 mb-3" style="text-align: center">
+                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+            </div>
         </div>
-        <div class="col-12 col-md-1 mb-3" style="text-align: center">
-            <button class="btn btn-primary btn-lg">Submit</button>
-        </div>
-    </div>
+    </form>
 </div>

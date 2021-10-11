@@ -3,14 +3,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PackageOccurence } from '../model/package-occurence';
 import { OccurenceComponent } from '../modal/occurence/occurence.component';
 import { OccurenceConfig } from '../modal/occurence/occurence.config';
-import { NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { CustomAdapter, CustomDateParserFormatter } from '../global/global.datepicker';
+// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+// import { FormControl } from '@angular/forms';
+// import { NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+// import { CustomAdapter, CustomDateParserFormatter } from '../global/global.datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { ConfirmConfig } from '../modal/confirm/confirm.config';
 import { ConfirmComponent } from '../modal/confirm/confirm.component';
 import { NotificationService } from '../service/notification.service';
 import { NotificationType } from '../enum/notification-type.enum';
+import { Packages } from '../model/packages';
 
 
 @Component({
@@ -18,37 +21,31 @@ import { NotificationType } from '../enum/notification-type.enum';
   templateUrl: './package-control.component.html',
   styleUrls: ['./package-control.component.css'],
   providers: [
-    { provide: NgbDateAdapter, useClass: CustomAdapter },
-    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter }
+    // { provide: NgbDateAdapter, useClass: CustomAdapter },
+    // { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter }
   ]
 })
 export class PackageControlComponent implements OnInit {
-  NEW_BATCH_NAME: string = "new Batch";
 
-  ELEMENT_DATA: Map<string, PackageOccurence[]> = new Map([
-    ["Batch1", [
-      { fromTime: "5:00 AM", toTime: "7:15 AM", timeDifferent: 2.33, isActive: true, repeatable: true, day: "SUN" },
-      { fromTime: "5:00 AM", toTime: "7:15 AM", timeDifferent: 2.33, isActive: true, repeatable: true, day: "MON" },
-      { fromTime: "5:00 AM", toTime: "7:15 AM", timeDifferent: 2.33, isActive: true, repeatable: true, day: "WED" },
-      { fromTime: "5:00 AM", toTime: "7:15 AM", timeDifferent: 2.33, isActive: true, repeatable: true, day: "FRI" },
-    ]],
-    ["Batch2", [
-      { fromTime: "5:00 AM", toTime: "7:15 AM", timeDifferent: 2.33, isActive: true, repeatable: true, day: "SAT" },
-      { fromTime: "5:00 AM", toTime: "7:15 AM", timeDifferent: 2.33, isActive: true, repeatable: true, day: "TUE" },
-      { fromTime: "5:00 AM", toTime: "7:15 AM", timeDifferent: 2.33, isActive: true, repeatable: true, day: "THR" },
-    ]],
-  ]);
+  NEW_BATCH_NAME: string = "new Batch";
+  package: Packages = {
+    visibility: true,
+    isActive: true,
+    refundable: true,
+    fixedCourse: false,
+    anyoneCanAddBatch: false,
+    mapOccurrences: new Map([]),
+  } as Packages;
   gradeVar = [{ name: "Primary", value: ["Class 1", "Class 2", "Class 3", "Class 4", "Class 5"] },
   { name: "Secondary", value: ["Class 6", "Class 7", "Class 8", "Class 9", "Class 10"] },
   { name: "Higher Secondary", value: ["Class 11", "Class 12", "Joint Entrance"] },
   { name: "Grads", value: ["GATE", "IES", "PSU"] },
   ];
 
-  model: NgbDateStruct;
+  // model: NgbDateStruct;
   @ViewChildren(MatTable) tables: QueryList<MatTable<PackageOccurence>>;
 
   displayedColumns: string[] = ['actions', 'from', 'to', 'day'];
-  mapData = this.ELEMENT_DATA;
   courseEnabler: boolean = false;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, public dialog: MatDialog, private notificationService: NotificationService) {
@@ -66,7 +63,7 @@ export class PackageControlComponent implements OnInit {
       disableClose: true,
     }).afterClosed().subscribe(result => {
       if (result !== undefined) {
-        this.ELEMENT_DATA.get(key).push(result);
+        this.package.mapOccurrences.get(key).push(result);
         this.tables.forEach(ele => ele.renderRows());
         this.sendNotification(NotificationType.SUCCESS, "Occurence Added Successfully in " + key);
       }
@@ -83,11 +80,11 @@ export class PackageControlComponent implements OnInit {
   }
 
   addPackOccurence(): void {
-    if (this.ELEMENT_DATA.has(this.NEW_BATCH_NAME)) {
+    if (this.package.mapOccurrences.has(this.NEW_BATCH_NAME)) {
       this.sendNotification(NotificationType.ERROR, "Please Change existing Batch name \"" + this.NEW_BATCH_NAME + "\" to add new");
       return;
     }
-    this.ELEMENT_DATA.set(this.NEW_BATCH_NAME, []);
+    this.package.mapOccurrences.set(this.NEW_BATCH_NAME, []);
     this.sendNotification(NotificationType.SUCCESS, "New Batch added with name " + this.NEW_BATCH_NAME);
   }
 
@@ -95,7 +92,7 @@ export class PackageControlComponent implements OnInit {
     let dialogInterface: OccurenceConfig = {
       dialogHeader: 'Edit the Occuerence',
       confirmButtonLabel: 'Update',
-      occuerence: this.ELEMENT_DATA.get(key)[value]
+      occuerence: this.package.mapOccurrences.get(key)[value]
     };
     this.dialog.open(OccurenceComponent, {
       width: '30em',
@@ -103,7 +100,7 @@ export class PackageControlComponent implements OnInit {
       disableClose: true,
     }).afterClosed().subscribe(result => {
       if (result !== undefined) {
-        this.ELEMENT_DATA.get(key)[value] = result;
+        this.package.mapOccurrences.get(key)[value] = result;
         this.tables.forEach(ele => ele.renderRows());
         this.sendNotification(NotificationType.DEFAULT, "Occurence Updated");
       }
@@ -122,7 +119,7 @@ export class PackageControlComponent implements OnInit {
       data: confirmInterface,
     }).afterClosed().subscribe(result => {
       if (result !== undefined) {
-        this.ELEMENT_DATA.get(key).splice(value, 1);
+        this.package.mapOccurrences.get(key).splice(value, 1);
         this.tables.forEach(ele => ele.renderRows());
         this.sendNotification(NotificationType.INFO, "Occuerence Deleted");
       }
@@ -140,17 +137,21 @@ export class PackageControlComponent implements OnInit {
       data: confirmInterface,
     }).afterClosed().subscribe(result => {
       if (result !== undefined) {
-        this.ELEMENT_DATA.delete(key);
+        this.package.mapOccurrences.delete(key);
         this.sendNotification(NotificationType.WARNING, key + " Batch Deleted");
       }
     });
   }
 
   onMapKeyChange(value: string, index: string): void {
-    let pack: PackageOccurence[] = this.ELEMENT_DATA.get(index);
+    let pack: PackageOccurence[] = this.package.mapOccurrences.get(index);
     //deleteing the previous key on the map
-    this.ELEMENT_DATA.delete(index);
-    this.ELEMENT_DATA.set(value, pack);
+    this.package.mapOccurrences.delete(index);
+    this.package.mapOccurrences.set(value, pack);
+  }
+
+  submitPackage() {
+    console.log(this.package);
   }
 
   private sendNotification(notificationType: NotificationType, message: string): void {

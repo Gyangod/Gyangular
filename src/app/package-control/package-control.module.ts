@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TimePickerModule } from '../common/timepicker/timepicker.module';
@@ -21,7 +21,7 @@ import { ConfirmComponent } from '../modal/confirm/confirm.component';
     TimePickerModule,
     PackageControlRoutingModule,
     MatTableModule,
-    NgbModule,
+    // NgbModule,
     NgSelectModule,
     MatDialogModule
   ]

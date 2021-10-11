@@ -37,8 +37,8 @@
     padding: .65rem .75rem;
 }
 
-.inputSelectIcon{
-    padding: .84rem .75rem;
+.inputSelectIcon {
+    padding: .96rem .75rem;
 }
 
 .loginOr {
@@ -62,14 +62,14 @@
     margin-bottom: 0em;
 }
 
-.cardHeader{
+.cardHeader {
     font-size: 150%;
 }
 
-.allScheduleSwitch{
+.allScheduleSwitch {
     float: right;
 }
 
-.formCheckBoxLabel{
+.formCheckBoxLabel {
     font-size: 110%;
 }
