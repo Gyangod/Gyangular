@@ -83,21 +83,36 @@ export class SignupComponent implements OnInit, OnDestroy {
       //main Signup process
       this.showLoading = true;
       this.subscriptions.push(
-        this.authenticationService.register(this.user).subscribe(
-          (response: HttpResponse<User>) => {
+        // this.authenticationService.register(this.user).subscribe(
+        //   (response: HttpResponse<User>) => {
+        //     const token = response.headers.get(HeaderType.JWT_TOKEN);
+        //     this.authenticationService.saveToken(token);
+        //     this.authenticationService.addUserToLocalCache(response.body);
+        //     this.router.navigateByUrl('/home');
+        //     this.showLoading = false;
+        //   },
+        //   (errorResponse: HttpErrorResponse) => {
+        //     this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
+        //     this.showLoading = false;
+        //     forms.confirmPass = this.user.password;
+        //   }
+        // )
+        this.authenticationService.register(this.user).subscribe({
+          next: (response: HttpResponse<User>) => {
             const token = response.headers.get(HeaderType.JWT_TOKEN);
             this.authenticationService.saveToken(token);
             this.authenticationService.addUserToLocalCache(response.body);
             this.router.navigateByUrl('/home');
             this.showLoading = false;
           },
-          (errorResponse: HttpErrorResponse) => {
+          error: (errorResponse: HttpErrorResponse) => {
             this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
             this.showLoading = false;
             forms.confirmPass = this.user.password;
           }
-        )
+        })
       );
+      
     }
   }
   private sendNotification(notificationType: NotificationType, message: string): void {

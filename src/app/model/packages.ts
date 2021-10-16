@@ -25,6 +25,6 @@ export interface Packages {
     mapOccurrences: Map<string,PackageOccurence[]>;
     subjects: string[];
     visibility: boolean;
-    isActive: boolean;
+    active: boolean;
 
 }

@@ -9,6 +9,7 @@ import { PackageControlRoutingModule } from './package-control-routing.module';
 import { PackageControlComponent } from './package-control.component';
 import { OccurenceComponent } from '../modal/occurence/occurence.component';
 import { ConfirmComponent } from '../modal/confirm/confirm.component';
+import { PackageSuccessComponent } from '../package-success/package-success.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { ConfirmComponent } from '../modal/confirm/confirm.component';
     PackageControlComponent,
     OccurenceComponent,
     ConfirmComponent,
+    PackageSuccessComponent,
   ],
   imports: [
     TimePickerModule,

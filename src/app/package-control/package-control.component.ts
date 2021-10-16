@@ -1,4 +1,4 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PackageOccurence } from '../model/package-occurence';
 import { OccurenceComponent } from '../modal/occurence/occurence.component';
@@ -14,6 +14,10 @@ import { ConfirmComponent } from '../modal/confirm/confirm.component';
 import { NotificationService } from '../service/notification.service';
 import { NotificationType } from '../enum/notification-type.enum';
 import { Packages } from '../model/packages';
+import { Subscription } from 'rxjs';
+import { PackagesService } from '../service/packages.service'
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { CustomHttpRespone } from '../model/custom-http-response';
 
 
 @Component({
@@ -25,30 +29,36 @@ import { Packages } from '../model/packages';
     // { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter }
   ]
 })
-export class PackageControlComponent implements OnInit {
+export class PackageControlComponent implements OnInit, OnDestroy {
 
   NEW_BATCH_NAME: string = "new Batch";
   package: Packages = {
     visibility: true,
-    isActive: true,
+    active: true,
     refundable: true,
     fixedCourse: false,
     anyoneCanAddBatch: false,
     mapOccurrences: new Map([]),
+    subjects: [],
+    standards: []
   } as Packages;
   gradeVar = [{ name: "Primary", value: ["Class 1", "Class 2", "Class 3", "Class 4", "Class 5"] },
   { name: "Secondary", value: ["Class 6", "Class 7", "Class 8", "Class 9", "Class 10"] },
   { name: "Higher Secondary", value: ["Class 11", "Class 12", "Joint Entrance"] },
   { name: "Grads", value: ["GATE", "IES", "PSU"] },
   ];
-
-  // model: NgbDateStruct;
+  private subscriptions: Subscription[] = [];
   @ViewChildren(MatTable) tables: QueryList<MatTable<PackageOccurence>>;
-
   displayedColumns: string[] = ['actions', 'from', 'to', 'day'];
   courseEnabler: boolean = false;
+  serviceCaller: string;
+  showLoading: boolean = false;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, public dialog: MatDialog, private notificationService: NotificationService) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private packagesService: PackagesService,
+    public dialog: MatDialog, private notificationService: NotificationService) {
+  }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   addOccuerence(key: string, index: number): void {
@@ -72,10 +82,17 @@ export class PackageControlComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.router.url.toString().includes("update")) {
-      console.log(this.activatedRoute.snapshot.paramMap.get('id'));
+      this.package.packageId = this.activatedRoute.snapshot.paramMap.get('id');
+      //todo: GET call from backend to the package object
+      this.serviceCaller = "U";
     } else {
       //TEACH or LEARN
-      console.log(this.activatedRoute.snapshot.paramMap.get('method'));
+      if (this.activatedRoute.snapshot.paramMap.get('method') == "teach") {
+        this.serviceCaller = "T";
+      }
+      else {
+        this.serviceCaller = "L";
+      }
     }
   }
 
@@ -151,7 +168,55 @@ export class PackageControlComponent implements OnInit {
   }
 
   submitPackage() {
+    if (this.validateSubmit()) {
+      this.showLoading = true;
+      if (this.serviceCaller == "T") {
+        this.subscriptions.push(
+          this.packagesService.teachPackage(this.package).subscribe({
+            next: (response: CustomHttpRespone) => {
+              this.router.navigateByUrl('/home/pack/success');
+              this.showLoading = false;
+            },
+            error: (errorResponse: HttpErrorResponse) => {
+              this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
+              this.showLoading = false;
+            }
+          })
+        );
+      } else if (this.serviceCaller == "L") {
+        this.subscriptions.push(
+          this.packagesService.savePackage(this.package).subscribe({
+            next: (response: CustomHttpRespone) => {
+              this.router.navigateByUrl('/home/pack/success');
+              this.showLoading = false;
+            },
+            error: (errorResponse: HttpErrorResponse) => {
+              this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
+              this.showLoading = false;
+            }
+          })
+        );
+      } else if (this.serviceCaller == "U") {
+        //TODO: make changes for update
+      }
+      else {
+        this.sendNotification(NotificationType.ERROR, "Something is fishy!");
+        this.router.navigateByUrl('/home');
+      }
+    }
     console.log(this.package);
+  }
+
+  validateSubmit(): boolean {
+    if (this.package.subjects.length == 0) {
+      this.sendNotification(NotificationType.WARNING, "Please Select atleast one Subject");
+      return false;
+    }
+    if (this.package.standards.length == 0) {
+      this.sendNotification(NotificationType.WARNING, "Please Select atleast one Grade");
+      return false;
+    }
+    return true;
   }
 
   private sendNotification(notificationType: NotificationType, message: string): void {

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
+import { CustomHttpRespone } from '../model/custom-http-response';
 import { Packages } from '../model/packages';
 
 @Injectable({
@@ -13,11 +14,23 @@ export class PackagesService {
 
   constructor(private http: HttpClient) { }
 
-  public teachPackage(pack: Packages, username: String): Observable<Packages> {
-    return this.http.post<Packages>(`${this.host}/pack/teach/${username}`, pack);
+  public teachPackage(pack: Packages): Observable<CustomHttpRespone> {
+    return this.http.post<CustomHttpRespone>(`${this.host}/pack/teach`, pack);
   }
 
-  public savePackage(pack: Packages, username: String): Observable<Packages> {
-    return this.http.post<Packages>(`${this.host}/pack/save/${username}`, pack);
+  public savePackage(pack: Packages): Observable<CustomHttpRespone> {
+    return this.http.post<CustomHttpRespone>(`${this.host}/pack/save`, pack);
+  }
+
+  public addResponseToLocalCache(response: CustomHttpRespone): void {
+    localStorage.setItem('response', JSON.stringify(response));
+  }
+
+  public deleteResponseFromLocalCache(): void {
+    localStorage.removeItem('response');
+  }
+
+  public loadResponseFromLocalCache(): CustomHttpRespone {
+    return JSON.parse(localStorage.getItem('response'));
   }
 }
