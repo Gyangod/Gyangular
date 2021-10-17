@@ -1,15 +1,27 @@
 .homeHeader {
   text-align: center;
 }
-.searchBarTop{
-    width: 90%;
-    float: left;
-  }
-.leftTopic{
-    width: 45%;
-    float: left;
-  }
-.rightTopic{
-    width: 45%;
-    float: right;
-  }
+
+.searchBarTop {
+  width: 90%;
+  float: left;
+}
+
+.leftTopic {
+  width: 45%;
+  float: left;
+}
+
+.rightTopic {
+  width: 45%;
+  float: right;
+}
+
+.cardHeader {
+  font-size: 150%;
+}
+
+.cardHeaderContainer {
+  background-color: teal;
+  text-align: center;
+}

@@ -31,6 +31,7 @@ import { CustomHttpRespone } from '../model/custom-http-response';
 })
 export class PackageControlComponent implements OnInit, OnDestroy {
 
+  batchMap: Map<string,PackageOccurence[]> = new Map([]);
   NEW_BATCH_NAME: string = "new Batch";
   package: Packages = {
     visibility: true,
@@ -38,7 +39,7 @@ export class PackageControlComponent implements OnInit, OnDestroy {
     refundable: true,
     fixedCourse: false,
     anyoneCanAddBatch: false,
-    mapOccurrences: new Map([]),
+    mapOccurrences: {},
     subjects: [],
     standards: []
   } as Packages;
@@ -73,7 +74,7 @@ export class PackageControlComponent implements OnInit, OnDestroy {
       disableClose: true,
     }).afterClosed().subscribe(result => {
       if (result !== undefined) {
-        this.package.mapOccurrences.get(key).push(result);
+        this.batchMap.get(key).push(result);
         this.tables.forEach(ele => ele.renderRows());
         this.sendNotification(NotificationType.SUCCESS, "Occurence Added Successfully in " + key);
       }
@@ -97,11 +98,11 @@ export class PackageControlComponent implements OnInit, OnDestroy {
   }
 
   addPackOccurence(): void {
-    if (this.package.mapOccurrences.has(this.NEW_BATCH_NAME)) {
+    if (this.batchMap.has(this.NEW_BATCH_NAME)) {
       this.sendNotification(NotificationType.ERROR, "Please Change existing Batch name \"" + this.NEW_BATCH_NAME + "\" to add new");
       return;
     }
-    this.package.mapOccurrences.set(this.NEW_BATCH_NAME, []);
+    this.batchMap.set(this.NEW_BATCH_NAME, []);
     this.sendNotification(NotificationType.SUCCESS, "New Batch added with name " + this.NEW_BATCH_NAME);
   }
 
@@ -109,7 +110,7 @@ export class PackageControlComponent implements OnInit, OnDestroy {
     let dialogInterface: OccurenceConfig = {
       dialogHeader: 'Edit the Occuerence',
       confirmButtonLabel: 'Update',
-      occuerence: this.package.mapOccurrences.get(key)[value]
+      occuerence: this.batchMap.get(key)[value]
     };
     this.dialog.open(OccurenceComponent, {
       width: '30em',
@@ -117,7 +118,7 @@ export class PackageControlComponent implements OnInit, OnDestroy {
       disableClose: true,
     }).afterClosed().subscribe(result => {
       if (result !== undefined) {
-        this.package.mapOccurrences.get(key)[value] = result;
+        this.batchMap.get(key)[value] = result;
         this.tables.forEach(ele => ele.renderRows());
         this.sendNotification(NotificationType.DEFAULT, "Occurence Updated");
       }
@@ -136,7 +137,7 @@ export class PackageControlComponent implements OnInit, OnDestroy {
       data: confirmInterface,
     }).afterClosed().subscribe(result => {
       if (result !== undefined) {
-        this.package.mapOccurrences.get(key).splice(value, 1);
+        this.batchMap.get(key).splice(value, 1);
         this.tables.forEach(ele => ele.renderRows());
         this.sendNotification(NotificationType.INFO, "Occuerence Deleted");
       }
@@ -154,22 +155,25 @@ export class PackageControlComponent implements OnInit, OnDestroy {
       data: confirmInterface,
     }).afterClosed().subscribe(result => {
       if (result !== undefined) {
-        this.package.mapOccurrences.delete(key);
+        this.batchMap.delete(key);
         this.sendNotification(NotificationType.WARNING, key + " Batch Deleted");
       }
     });
   }
 
   onMapKeyChange(value: string, index: string): void {
-    let pack: PackageOccurence[] = this.package.mapOccurrences.get(index);
+    let pack: PackageOccurence[] = this.batchMap.get(index);
     //deleteing the previous key on the map
-    this.package.mapOccurrences.delete(index);
-    this.package.mapOccurrences.set(value, pack);
+    this.batchMap.delete(index);
+    this.batchMap.set(value, pack);
   }
 
   submitPackage() {
     if (this.validateSubmit()) {
       this.showLoading = true;
+      this.batchMap.forEach((value: PackageOccurence[], key: string) => {
+        this.package.mapOccurrences[key] = value;
+      });
       if (this.serviceCaller == "T") {
         this.subscriptions.push(
           this.packagesService.teachPackage(this.package).subscribe({

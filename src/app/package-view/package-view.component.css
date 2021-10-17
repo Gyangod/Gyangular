@@ -1,0 +1,12 @@
+.cardBodyStyle {
+    text-align: center;
+    font-size: 120%;
+}
+
+.footerIcons {
+    float: left;
+}
+
+.iconSpan {
+    margin-right: .75em;
+}

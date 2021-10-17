@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { PackageControlComponent } from './package-control.component';
 import { PackageSuccessComponent } from '../package-success/package-success.component';
+import { PackageViewComponent } from '../package-view/package-view.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,11 @@ const routes: Routes = [
   {
     path: 'success',
     component: PackageSuccessComponent
-  }
+  },
+  {
+    path: 'view',
+    component: PackageViewComponent
+  },
 ];
 
 @NgModule({

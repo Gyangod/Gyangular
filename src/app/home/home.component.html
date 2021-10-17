@@ -1,10 +1,10 @@
-<div class="container">
+<div class="container-xl">
   <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills nav-fill mt-3 border border-primary rounded">
     <li [ngbNavItem]="1">
       <a ngbNavLink>Student</a>
       <ng-template ngbNavContent>
         <div class="row">
-          <div class="card col-12 col-md-8 mt-3">
+          <div class="card col-12 col-md-7 mt-3">
             <div class="card-body">
               <div class="homeHeader">
                 <h2>Wish to learn something new</h2>
@@ -48,10 +48,18 @@
               </form>
             </div>
           </div>
-          <div class="col-12 offset-md-1 col-md-3 mt-3">
-            <div>
-              <button type="submit" class="btn btn-primary" (click)="packageCreate('learn')"> Create </button>
-              <button type="submit" class="btn btn-secondary" (click)="packageUpdate()"> Update </button>
+          <div class="col-12 col-md-5 mt-3 ml-3">
+            <div class="card">
+              <div class="card-header cardHeaderContainer">
+                <label class="cardHeader">Packages</label>
+              </div>
+              <div class="card-body" style="text-align:center;">
+                <div class="shadow p-3 my-3 bg-body rounded" (click)="showPackages()">
+                  Regular shadow
+                  <i class="fas fa-angle-right" style="float:right"></i>
+                </div>
+                <button type="submit" class="btn btn-primary" (click)="packageCreate('learn')">Create New</button>
+              </div>
             </div>
           </div>
         </div>
